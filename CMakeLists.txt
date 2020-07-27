@@ -19,5 +19,6 @@ include_directories (native/include INCLUDE_DIR)
 
 # Add source files to executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${INCLUDE_DIR})
-
+# Copy config files for styling the widgets
+add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/config/ $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 target_link_libraries(${PROJECT_NAME} ${GTK3_LIBRARIES})
