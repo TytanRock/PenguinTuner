@@ -1,12 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="upper">100</property>
+    <property name="value">2.2351741811588166e-10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkTextBuffer" id="textbuffer1"/>
+  <object class="GtkListStore" id="txt_ip_address_completion_values">
+    <columns>
+      <!-- column-name Default -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">172.22.11.2 # RoboRIO over USB</col>
+      </row>
+      <row>
+        <col id="0">localhost # Local development</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkEntryCompletion" id="txt_ip_address_completion">
+    <property name="model">txt_ip_address_completion_values</property>
+    <property name="inline_completion">True</property>
+  </object>
+  <object class="GtkTextBuffer" id="txt_robot_controller_about">
+    <property name="text">Phoenix Tuner provides field-upgrade, configuration, and self-test for CTRE CAN Devices by communicating with a software library called Phoenix Diagnostics Server (linked into your roboRIO application).  The Phoenix Diagnostics Server runs as part of any 2020 or later FRC robot project that uses Phoenix API.
+
+Alternatively, a Temporary Diagnostic Server can be deployed in place of a robot project by pressing the Run Temporary Diagnostic Server button.
+This will stop your robot project - Phoenix Diagnostic Server will be running instead.  To restore RoboRIO startup behavior, use the respective Restart Robot Code button.  LabVIEW teams can instead press Run-As-Startup.  Always power-cycle and test your application before each match.
+
+You may enter your team number or roboRIO IP address for server address, this is necessary to connect wirelessly to your robot.  Tuner will react automatically when you change the server address and save it persistently.
+
+To install on a non-FRC platform, connect a supported Linux platform to the PC and enter the IP address in the server address drop down below.  Then press Install Phoenix Library/Diagnostics.  This will install the Phoenix Diagnostics server.
+To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
+</property>
+  </object>
   <object class="GtkWindow" id="window">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="hexpand">True</property>
+    <property name="vexpand">True</property>
     <property name="border_width">10</property>
-    <property name="title">Grid</property>
+    <property name="title">Linux Tuner</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -14,12 +53,220 @@
       <object class="GtkGrid">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
         <child>
-          <object class="GtkButton" id="button1">
-            <property name="label" translatable="yes">Print Hello World</property>
+          <object class="GtkNotebook">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkFixed" id="fxd_robot_controller">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">False</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="width_request">210</property>
+                    <property name="height_request">20</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Server Address or Team Number</property>
+                  </object>
+                  <packing>
+                    <property name="y">250</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="width_request">26</property>
+                    <property name="height_request">21</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Port</property>
+                  </object>
+                  <packing>
+                    <property name="x">500</property>
+                    <property name="y">250</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="str_server_port">
+                    <property name="width_request">250</property>
+                    <property name="height_request">34</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="halign">end</property>
+                  </object>
+                  <packing>
+                    <property name="x">500</property>
+                    <property name="y">270</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkTextView" id="txt_controller_status">
+                    <property name="width_request">495</property>
+                    <property name="height_request">136</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="buffer">textbuffer1</property>
+                  </object>
+                  <packing>
+                    <property name="y">310</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox">
+                    <property name="width_request">495</property>
+                    <property name="height_request">34</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="model">txt_ip_address_completion_values</property>
+                    <property name="has_entry">True</property>
+                    <property name="entry_text_column">0</property>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="txt_ip_address">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="y">270</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="width_request">742</property>
+                    <property name="height_request">238</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkTextView">
+                        <property name="width_request">960</property>
+                        <property name="height_request">289</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="vadjustment">adjustment1</property>
+                        <property name="wrap_mode">word</property>
+                        <property name="buffer">txt_robot_controller_about</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">5</property>
+                    <property name="y">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_run_temporary_diag_server">
+                    <property name="label" translatable="yes">Run Temporary Diagnostic Server</property>
+                    <property name="width_request">250</property>
+                    <property name="height_request">94</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">end</property>
+                  </object>
+                  <packing>
+                    <property name="x">500</property>
+                    <property name="y">310</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="tab_robot_controller">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Robot Controller</property>
+              </object>
+              <packing>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="fxd_can_devices">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkTreeView">
+                    <property name="width_request">752</property>
+                    <property name="height_request">197</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection"/>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="tab_can_devices">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">CAN Devices</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="fxd_selftest_snapshot">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="width_request">742</property>
+                    <property name="height_request">383</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkTextView">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">5</property>
+                    <property name="y">5</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="tab_selftest_snapshot">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Self-Test Snapshot</property>
+              </object>
+              <packing>
+                <property name="position">2</property>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -27,46 +274,46 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button2">
-            <property name="label" translatable="yes">Print Hello World Again</property>
+          <object class="GtkGrid">
+            <property name="height_request">34</property>
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">end</property>
+            <property name="hexpand">True</property>
+            <property name="column_homogeneous">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Server Status:
+Unknown</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Server Version:
+Unknown</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
           </object>
           <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">0</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
           </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="quit">
-            <property name="label" translatable="yes">Quit</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
         </child>
       </object>
     </child>
