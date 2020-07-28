@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkAdjustment" id="adj_robot_controller_scroll">
@@ -114,13 +114,14 @@ To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="str_server_port">
+                  <object class="GtkEntry" id="txt_server_port">
                     <property name="width_request">280</property>
                     <property name="height_request">30</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="halign">end</property>
                     <property name="valign">end</property>
+                    <property name="input_purpose">digits</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -183,10 +184,11 @@ To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
                     <property name="has_entry">True</property>
                     <property name="entry_text_column">0</property>
                     <child internal-child="entry">
-                      <object class="GtkEntry" id="txt_ip_address">
+                      <object class="GtkEntry" id="txt_server_ip">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
+                        <property name="text" translatable="yes">172.22.11.2 # RoboRIO over USB</property>
                       </object>
                     </child>
                   </object>
@@ -237,9 +239,10 @@ To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
                     <property name="hexpand">True</property>
                     <property name="row_homogeneous">True</property>
                     <child>
-                      <object class="GtkSpinButton">
+                      <object class="GtkSpinButton" id="txt_device_id">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="input_purpose">digits</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -275,7 +278,7 @@ the ID</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="btn_change_id">
                         <property name="label" translatable="yes">Change ID</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -301,7 +304,7 @@ the Name</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry">
+                      <object class="GtkEntry" id="txt_device_name">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
@@ -312,7 +315,7 @@ the Name</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="btn_change_name">
                         <property name="label" translatable="yes">Change Name</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -338,8 +341,8 @@ and confirm ID is correct</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton">
-                        <property name="label" translatable="yes">Blink</property>
+                      <object class="GtkButton" id="btn_blink">
+                        <property name="label" translatable="yes">Blink / Clear Faults</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -372,7 +375,7 @@ and confirm ID is correct</property>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">0</property>
-                        <property name="width">2</property>
+                        <property name="width">3</property>
                       </packing>
                     </child>
                     <child>
@@ -384,11 +387,11 @@ and confirm ID is correct</property>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">1</property>
-                        <property name="width">2</property>
+                        <property name="width">3</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSearchEntry">
+                      <object class="GtkSearchEntry" id="txt_firmware_file">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
@@ -403,7 +406,7 @@ and confirm ID is correct</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkCheckButton">
+                      <object class="GtkCheckButton" id="chk_update_all_devices">
                         <property name="label" translatable="yes">Update all devices 
 with matching type</property>
                         <property name="visible">True</property>
@@ -414,10 +417,11 @@ with matching type</property>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">3</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="btn_update_devices">
                         <property name="label" translatable="yes">Update Device(s)</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -426,6 +430,7 @@ with matching type</property>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">4</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -435,7 +440,7 @@ with matching type</property>
                         <property name="hexpand">True</property>
                         <property name="shadow_type">in</property>
                         <child>
-                          <object class="GtkTextView">
+                          <object class="GtkTextView" id="txt_firmware_status">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="hexpand">True</property>
@@ -450,6 +455,18 @@ with matching type</property>
                         <property name="left_attach">0</property>
                         <property name="top_attach">3</property>
                         <property name="height">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_prompt_firmware_file">
+                        <property name="label" translatable="yes">...</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="top_attach">2</property>
                       </packing>
                     </child>
                   </object>
@@ -493,7 +510,7 @@ with matching type</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton">
+                  <object class="GtkButton" id="btn_snapshot">
                     <property name="label" translatable="yes">Self-Test Snapshot</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -505,7 +522,7 @@ with matching type</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton">
+                  <object class="GtkButton" id="btn_copy_to_clipboard">
                     <property name="label" translatable="yes">Copy to Clipboard</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -517,7 +534,7 @@ with matching type</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton">
+                  <object class="GtkButton" id="btn_blink_clear">
                     <property name="label" translatable="yes">Blink / Clear Faults</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
