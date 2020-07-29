@@ -2,7 +2,7 @@
 cmake_minimum_required (VERSION 2.8.11 )
 
 # Project name
-project (LinuxTuner C)
+project (PenguinTuner C)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK3 REQUIRED gtk+-3.0)

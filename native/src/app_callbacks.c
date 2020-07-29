@@ -26,9 +26,17 @@ int connect_all_signals(const char *ui_filename)
     obj = gtk_builder_get_object(builder, "btn_run_temporary_diag_server");
     g_signal_connect(obj, "clicked", G_CALLBACK(react_btn_run_temporary_diag_server), NULL);
     
-    /* Connect entry field to robot_controller file */
+    /* Connect address field to robot_controller file */
     obj = gtk_builder_get_object(builder, "txt_server_ip");
     add_txt_server_ip_entry((GtkEntry *)obj);
+    
+    /* Connect port field to robot_controller file */
+    obj = gtk_builder_get_object(builder, "txt_server_port");
+    add_txt_server_port_entry((GtkEntry *)obj);
+
+    /* Connect status buffer to robot_controller file */
+    obj = gtk_builder_get_object(builder, "txtbuf_robot_controller_status");
+    add_txt_controller_status_buffer((GtkTextBuffer *)obj);
 
     return 0;
 }

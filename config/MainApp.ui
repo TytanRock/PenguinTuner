@@ -45,7 +45,7 @@ To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
     <property name="border_width">10</property>
-    <property name="title">Linux Tuner</property>
+    <property name="title">Penguin Tuner</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -121,6 +121,7 @@ To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
                     <property name="can_focus">True</property>
                     <property name="halign">end</property>
                     <property name="valign">end</property>
+                    <property name="text" translatable="yes">1250</property>
                     <property name="input_purpose">digits</property>
                   </object>
                   <packing>
