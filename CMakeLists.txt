@@ -16,6 +16,8 @@ aux_source_directory (native/src SOURCE_FILES)
 
 # Specify include directory
 include_directories (native/include INCLUDE_DIR)
+include_directories (backend/headers INCLUDE_DIR)
+link_directories (backend/lib)
 
 # Add source files to executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${INCLUDE_DIR})
