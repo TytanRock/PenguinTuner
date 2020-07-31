@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 2.8.11 )
 project (PenguinTuner C)
 
 find_package(PkgConfig REQUIRED)
+find_package(CURL REQUIRED)
 pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 include_directories(${GTK3_INCLUDE_DIRS})
 link_directories(${GTK3_LIBRARY_DIRS})
@@ -24,3 +25,6 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${INCLUDE_DIR})
 # Copy config files for styling the widgets
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/config/ $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 target_link_libraries(${PROJECT_NAME} ${GTK3_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} Penguin_Backend.so)
+target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
+

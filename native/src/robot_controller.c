@@ -1,4 +1,5 @@
 #include "robot_controller.h"
+#include "server_requests.h"
 
 static struct {
     GtkEntry *server_ip_entry;
@@ -9,6 +10,7 @@ static struct {
 void react_btn_run_temporary_diag_server(GtkWidget *widget, gpointer data)
 {
     gtk_text_buffer_set_text(_module.controller_status_buffer, "Hello World!", -1);
+    get_devices(NULL, 0);
 }
 
 void add_txt_server_ip_entry(GtkEntry *entry)
