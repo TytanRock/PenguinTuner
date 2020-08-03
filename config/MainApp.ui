@@ -529,7 +529,7 @@ with matching type</property>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="clmn_devices">
-                        <property name="sizing">autosize</property>
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Devices</property>
                         <property name="clickable">True</property>
                         <child>
@@ -542,7 +542,7 @@ with matching type</property>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="clmn_software_status">
-                        <property name="sizing">autosize</property>
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Software Status</property>
                         <property name="clickable">True</property>
                         <child>
@@ -555,7 +555,7 @@ with matching type</property>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="clmn_hardware">
-                        <property name="sizing">autosize</property>
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Hardware</property>
                         <property name="clickable">True</property>
                         <child>
@@ -568,7 +568,7 @@ with matching type</property>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="clmn_id">
-                        <property name="sizing">autosize</property>
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">ID</property>
                         <property name="clickable">True</property>
                         <child>
@@ -581,7 +581,7 @@ with matching type</property>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="clmn_firmware_version">
-                        <property name="sizing">autosize</property>
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Firmware Version</property>
                         <property name="clickable">True</property>
                         <child>

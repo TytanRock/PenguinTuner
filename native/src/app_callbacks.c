@@ -23,6 +23,8 @@ gint periodic_callback(gpointer data)
         get_devices(_module.devices, MAX_DEVICE_COUNT, &_module.deviceCount);
         GtkTreeIter iter;
         
+        printf("# of Devices: %d\n", _module.deviceCount);
+
         int validIter = gtk_tree_model_get_iter_first(_module.deviceTreeModel, &iter);
         int i;
         for(i = 0; i < _module.deviceCount; ++i)
