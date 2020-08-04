@@ -35,6 +35,7 @@ typedef struct _can_device_t
 backend_error start_backend();
 backend_error stop_backend();
 
+backend_error set_ip(char *ipAddr);
 backend_error get_devices(can_device_t *devices, int maxDeviceCount, int *deviceCount);
 
 #endif
