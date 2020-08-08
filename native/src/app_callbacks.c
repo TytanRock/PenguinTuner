@@ -1,6 +1,7 @@
 #include "robot_controller.h"
 #include "app_callbacks.h"
 #include "backend.h"
+#include "can_devices.h"
 
 #include <gtk/gtk.h>
 #include <stdio.h>
@@ -23,43 +24,45 @@ gint periodic_callback(gpointer data)
     /* Update devices */
     {
         /* Call into the backend and get the most up-to-date devices */
-        get_devices(_module.devices, MAX_DEVICE_COUNT, &_module.deviceCount);
-        GtkTreeIter iter;
-
-        /* Get the first tree iterator and fill the tree with devices */
-        int validIter = gtk_tree_model_get_iter_first(_module.deviceTreeModel, &iter);
-        int i;
-        for(i = 0; i < _module.deviceCount; ++i)
+        if(get_devices(_module.devices, MAX_DEVICE_COUNT, &_module.deviceCount) == Ok)
         {
-            /* if the iterator isn't valid, append a new row to the list */
-            if(!validIter) {
-                gtk_list_store_append(_module.deviceListStore, &iter);
+            GtkTreeIter iter;
+
+            /* Get the first tree iterator and fill the tree with devices */
+            int validIter = gtk_tree_model_get_iter_first(_module.deviceTreeModel, &iter);
+            int i;
+            for(i = 0; i < _module.deviceCount; ++i)
+            {
+                /* if the iterator isn't valid, append a new row to the list */
+                if(!validIter) {
+                    gtk_list_store_append(_module.deviceListStore, &iter);
+                }
+
+                /* Initialize GValues to fill the list */
+                GValue stringVal = G_VALUE_INIT;
+                g_value_init(&stringVal, G_TYPE_STRING);
+                GValue intVal = G_VALUE_INIT;
+                g_value_init(&intVal, G_TYPE_INT);
+                
+                /* Set the values of the tree values */
+                g_value_set_string(&stringVal, _module.devices[i].name);
+                gtk_list_store_set_value(_module.deviceListStore, &iter, 0, &stringVal); // Device Name
+                g_value_set_string(&stringVal, _module.devices[i].software_status);
+                gtk_list_store_set_value(_module.deviceListStore, &iter, 1, &stringVal); // Device Software Status
+                g_value_set_string(&stringVal, _module.devices[i].model);
+                gtk_list_store_set_value(_module.deviceListStore, &iter, 2, &stringVal); // Device Model
+                g_value_set_int(&intVal, _module.devices[i].id);
+                gtk_list_store_set_value(_module.deviceListStore, &iter, 3, &intVal); // Device ID
+                g_value_set_string(&stringVal, _module.devices[i].firmware_version);
+                gtk_list_store_set_value(_module.deviceListStore, &iter, 4, &stringVal); // Device Firmware Version
+
+                /* Go to the next list value */
+                validIter = gtk_tree_model_iter_next(_module.deviceTreeModel, &iter);
             }
-
-            /* Initialize GValues to fill the list */
-            GValue stringVal = G_VALUE_INIT;
-            g_value_init(&stringVal, G_TYPE_STRING);
-            GValue intVal = G_VALUE_INIT;
-            g_value_init(&intVal, G_TYPE_INT);
-
-            /* Set the values of the tree values */
-            g_value_set_string(&stringVal, _module.devices[i].name);
-            gtk_list_store_set_value(_module.deviceListStore, &iter, 0, &stringVal); // Device Name
-            g_value_set_string(&stringVal, _module.devices[i].software_status);
-            gtk_list_store_set_value(_module.deviceListStore, &iter, 1, &stringVal); // Device Software Status
-            g_value_set_string(&stringVal, _module.devices[i].model);
-            gtk_list_store_set_value(_module.deviceListStore, &iter, 2, &stringVal); // Device Model
-            g_value_set_int(&intVal, _module.devices[i].id);
-            gtk_list_store_set_value(_module.deviceListStore, &iter, 3, &intVal); // Device ID
-            g_value_set_string(&stringVal, _module.devices[i].firmware_version);
-            gtk_list_store_set_value(_module.deviceListStore, &iter, 4, &stringVal); // Device Firmware Version
-
-            /* Go to the next list value */
-            validIter = gtk_tree_model_iter_next(_module.deviceTreeModel, &iter);
-        }
-        /* Delete all the other list values, they don't exist on the network anymore */
-        if(validIter) {
-            while(gtk_list_store_remove(_module.deviceListStore, &iter)) ;
+            /* Delete all the other list values, they don't exist on the network anymore */
+            if(validIter) {
+                while(gtk_list_store_remove(_module.deviceListStore, &iter)) ;
+            }
         }
     }
     return 1;
@@ -114,6 +117,10 @@ int connect_all_signals(const char *ui_filename)
     /* Connect status buffer to robot_controller file */
     obj = gtk_builder_get_object(builder, "txtbuf_robot_controller_status");
     add_txt_controller_status_buffer((GtkTextBuffer *)obj);
+    
+    /* Connect Selected Device label to can_devices file */
+    obj = gtk_builder_get_object(builder, "txt_selected_device");
+    add_lbl_selected_device((GtkLabel *)obj);
 
     /* Connect server address and port text change to react function */
 
@@ -121,6 +128,9 @@ int connect_all_signals(const char *ui_filename)
     _module.deviceListStore = (GtkListStore *)gtk_builder_get_object(builder, "lst_can_devices");
     _module.deviceTreeModel = (GtkTreeModel *)gtk_builder_get_object(builder, "lst_can_devices");
     
+    obj = gtk_builder_get_object(builder, "slct_device_selection");
+    add_slct_device_selection((GtkTreeSelection *)obj);
+    g_signal_connect(obj, "changed", G_CALLBACK(react_changed_device), NULL);
 
     return 0;
 }

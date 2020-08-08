@@ -525,7 +525,7 @@ with matching type</property>
                     <property name="search_column">0</property>
                     <property name="enable_grid_lines">vertical</property>
                     <child internal-child="selection">
-                      <object class="GtkTreeSelection"/>
+                      <object class="GtkTreeSelection" id="slct_device_selection"/>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="clmn_devices">
@@ -709,7 +709,7 @@ Unknown</property>
                 <property name="justify">center</property>
               </object>
               <packing>
-                <property name="left_attach">0</property>
+                <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>
@@ -723,7 +723,20 @@ Unknown</property>
                 <property name="justify">center</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="txt_selected_device">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Selected Device:
+Unknown</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
               </packing>
             </child>

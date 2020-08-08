@@ -25,7 +25,7 @@ typedef enum _backend_error
  */
 typedef struct _can_device_t
 {
-    char name[20];
+    char name[50];
     char software_status[40];
     char model[20];
     int id;
