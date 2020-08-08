@@ -121,6 +121,12 @@ int connect_all_signals(const char *ui_filename)
     /* Connect Selected Device label to can_devices file */
     obj = gtk_builder_get_object(builder, "txt_selected_device");
     add_lbl_selected_device((GtkLabel *)obj);
+    
+    /* Connect device stuff to can_devices file */
+    obj = gtk_builder_get_object(builder, "btn_change_id");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_changed_id), NULL);
+    obj = gtk_builder_get_object(builder, "txt_device_id");
+    add_txt_change_id((GtkSpinButton *)obj);
 
     /* Connect server address and port text change to react function */
 

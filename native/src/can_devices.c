@@ -7,6 +7,7 @@ static struct
 {
     GtkTreeSelection *device_selector;
     GtkLabel *selected_device_label;
+    GtkSpinButton *txt_dev_id;
 
     can_device_t selected_device;
 }_module;
@@ -14,6 +15,7 @@ static struct
 void add_slct_device_selection(GtkTreeSelection *selector)
 {
     _module.device_selector = selector;
+    _module.selected_device.id = -1; // Initialize selected device here as well for the moment
 }
 
 void add_lbl_selected_device(GtkLabel *lbl)
@@ -21,11 +23,25 @@ void add_lbl_selected_device(GtkLabel *lbl)
     _module.selected_device_label = lbl;
 }
 
+void add_txt_change_id(GtkSpinButton *idTxt)
+{
+    _module.txt_dev_id = idTxt;
+}
+
 can_device_t get_selected_device()
 {
     return _module.selected_device;
 }
 
+void react_changed_id(GtkWidget *widget, gpointer data)
+{
+    /* Check we have a device selected */
+    if(_module.selected_device.id != -1)
+    {
+        int newId = gtk_spin_button_get_value_as_int(_module.txt_dev_id);
+        set_device_id(&_module.selected_device, newId);
+    }
+}
 
 void react_changed_device(GtkWidget *widget, gpointer data)
 {
@@ -56,6 +72,8 @@ void react_changed_device(GtkWidget *widget, gpointer data)
         char labelString[100];
         sprintf(labelString, "Selected Device:\n%s |Model: %s ID: %d|", _module.selected_device.name, _module.selected_device.model, _module.selected_device.id);
         gtk_label_set_text(_module.selected_device_label, labelString);
+    } else {
+        _module.selected_device.id = -1;
     }
 }
 
