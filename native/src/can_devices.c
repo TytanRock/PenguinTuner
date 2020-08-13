@@ -13,6 +13,8 @@ static struct
     can_device_t selected_device;
 }_module;
 
+void update_lbl();
+
 void add_slct_device_selection(GtkTreeSelection *selector)
 {
     _module.device_selector = selector;
@@ -38,15 +40,18 @@ can_device_t get_selected_device()
 {
     return _module.selected_device;
 }
-
-void react_changed_id(GtkWidget *widget, gpointer data)
+void set_selected_device(can_device_t newDevice)
 {
-    /* Check we have a device selected */
-    if(_module.selected_device.id != -1)
-    {
-        int newId = gtk_spin_button_get_value_as_int(_module.txt_dev_id);
-        set_device_id(&_module.selected_device, newId);
-    }
+    _module.selected_device = newDevice;
+    update_lbl();
+}
+
+void update_lbl()
+{
+    /* Update label with our selected device */
+    char labelString[100];
+    sprintf(labelString, "Selected Device:\n| Model: %s ID: %d |", _module.selected_device.model, _module.selected_device.id);
+    gtk_label_set_text(_module.selected_device_label, labelString);
 }
 
 void react_changed_device(GtkWidget *widget, gpointer data)
@@ -74,12 +79,22 @@ void react_changed_device(GtkWidget *widget, gpointer data)
             _module.selected_device.id = g_value_get_int(&value);
             g_value_unset(&value);
         }
-        /* Update label with our selected device */
-        char labelString[100];
-        sprintf(labelString, "Selected Device:\n%s |Model: %s ID: %d|", _module.selected_device.name, _module.selected_device.model, _module.selected_device.id);
-        gtk_label_set_text(_module.selected_device_label, labelString);
+        update_lbl();
     } else {
         _module.selected_device.id = -1;
+    }
+}
+
+void react_changed_id(GtkWidget *widget, gpointer data)
+{
+    /* Check we have a device selected */
+    if(_module.selected_device.id != -1)
+    {
+        int newId = gtk_spin_button_get_value_as_int(_module.txt_dev_id);
+        if(set_device_id(&_module.selected_device, newId, frontend_callback) == 0)
+        {
+            // Nothing
+        }
     }
 }
 

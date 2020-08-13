@@ -10,6 +10,7 @@ void add_txt_change_id(GtkSpinButton *idTxt);
 void add_btn_firmware_file(GtkFileChooserButton *btn);
 
 can_device_t get_selected_device();
+void set_selected_device(can_device_t newDevice);
 
 void react_changed_id(GtkWidget *widget, gpointer data);
 void react_changed_device(GtkWidget *widget, gpointer data);
