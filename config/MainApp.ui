@@ -413,7 +413,7 @@ and confirm ID is correct</property>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">0</property>
-                        <property name="width">3</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -425,21 +425,6 @@ and confirm ID is correct</property>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">1</property>
-                        <property name="width">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkSearchEntry" id="txt_firmware_file">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="primary_icon_name">edit-find-symbolic</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">False</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
                         <property name="width">2</property>
                       </packing>
                     </child>
@@ -455,7 +440,6 @@ with matching type</property>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">3</property>
-                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -468,7 +452,6 @@ with matching type</property>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">4</property>
-                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -496,15 +479,15 @@ with matching type</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="btn_prompt_firmware_file">
-                        <property name="label" translatable="yes">...</property>
+                      <object class="GtkFileChooserButton" id="btn_choose_firmware">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="title" translatable="yes">Choose CRF firmware file</property>
                       </object>
                       <packing>
-                        <property name="left_attach">2</property>
+                        <property name="left_attach">0</property>
                         <property name="top_attach">2</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                   </object>

@@ -15,7 +15,6 @@ static struct
     int deviceCount;
     
     /* Gtk Widget references that matter */
-    GtkListStore *deviceListStore;
     GtkTreeModel *deviceTreeModel;
 }_module;
 
@@ -35,7 +34,7 @@ gint periodic_callback(gpointer data)
             {
                 /* if the iterator isn't valid, append a new row to the list */
                 if(!validIter) {
-                    gtk_list_store_append(_module.deviceListStore, &iter);
+                    gtk_list_store_append((GtkListStore *)_module.deviceTreeModel, &iter);
                 }
 
                 /* Initialize GValues to fill the list */
@@ -46,22 +45,22 @@ gint periodic_callback(gpointer data)
                 
                 /* Set the values of the tree values */
                 g_value_set_string(&stringVal, _module.devices[i].name);
-                gtk_list_store_set_value(_module.deviceListStore, &iter, 0, &stringVal); // Device Name
+                gtk_list_store_set_value((GtkListStore *)_module.deviceTreeModel, &iter, 0, &stringVal); // Device Name
                 g_value_set_string(&stringVal, _module.devices[i].software_status);
-                gtk_list_store_set_value(_module.deviceListStore, &iter, 1, &stringVal); // Device Software Status
+                gtk_list_store_set_value((GtkListStore *)_module.deviceTreeModel, &iter, 1, &stringVal); // Device Software Status
                 g_value_set_string(&stringVal, _module.devices[i].model);
-                gtk_list_store_set_value(_module.deviceListStore, &iter, 2, &stringVal); // Device Model
+                gtk_list_store_set_value((GtkListStore *)_module.deviceTreeModel, &iter, 2, &stringVal); // Device Model
                 g_value_set_int(&intVal, _module.devices[i].id);
-                gtk_list_store_set_value(_module.deviceListStore, &iter, 3, &intVal); // Device ID
+                gtk_list_store_set_value((GtkListStore *)_module.deviceTreeModel, &iter, 3, &intVal); // Device ID
                 g_value_set_string(&stringVal, _module.devices[i].firmware_version);
-                gtk_list_store_set_value(_module.deviceListStore, &iter, 4, &stringVal); // Device Firmware Version
+                gtk_list_store_set_value((GtkListStore *)_module.deviceTreeModel, &iter, 4, &stringVal); // Device Firmware Version
 
                 /* Go to the next list value */
                 validIter = gtk_tree_model_iter_next(_module.deviceTreeModel, &iter);
             }
             /* Delete all the other list values, they don't exist on the network anymore */
             if(validIter) {
-                while(gtk_list_store_remove(_module.deviceListStore, &iter)) ;
+                while(gtk_list_store_remove((GtkListStore *)_module.deviceTreeModel, &iter)) ;
             }
         }
     }
@@ -127,11 +126,14 @@ int connect_all_signals(const char *ui_filename)
     g_signal_connect(obj, "clicked", G_CALLBACK(react_changed_id), NULL);
     obj = gtk_builder_get_object(builder, "txt_device_id");
     add_txt_change_id((GtkSpinButton *)obj);
+    obj = gtk_builder_get_object(builder, "btn_choose_firmware");
+    add_btn_firmware_file((GtkFileChooserButton *)obj);
+    obj = gtk_builder_get_object(builder, "btn_update_devices");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_update_firmware), NULL);
 
     /* Connect server address and port text change to react function */
 
     /* Get reference to the list store */
-    _module.deviceListStore = (GtkListStore *)gtk_builder_get_object(builder, "lst_can_devices");
     _module.deviceTreeModel = (GtkTreeModel *)gtk_builder_get_object(builder, "lst_can_devices");
     
     obj = gtk_builder_get_object(builder, "slct_device_selection");

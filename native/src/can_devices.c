@@ -8,6 +8,7 @@ static struct
     GtkTreeSelection *device_selector;
     GtkLabel *selected_device_label;
     GtkSpinButton *txt_dev_id;
+    GtkFileChooserButton *btn_firmware_file;
 
     can_device_t selected_device;
 }_module;
@@ -26,6 +27,11 @@ void add_lbl_selected_device(GtkLabel *lbl)
 void add_txt_change_id(GtkSpinButton *idTxt)
 {
     _module.txt_dev_id = idTxt;
+}
+
+void add_btn_firmware_file(GtkFileChooserButton *btn)
+{
+    _module.btn_firmware_file = btn;
 }
 
 can_device_t get_selected_device()
@@ -75,5 +81,12 @@ void react_changed_device(GtkWidget *widget, gpointer data)
     } else {
         _module.selected_device.id = -1;
     }
+}
+
+void react_update_firmware(GtkWidget *widget, gpointer data)
+{
+    const char *firmware_file = gtk_file_chooser_get_filename((GtkFileChooser *)_module.btn_firmware_file);
+
+    printf("File: %s\n", firmware_file);
 }
 
