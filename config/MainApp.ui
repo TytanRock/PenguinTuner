@@ -455,6 +455,18 @@ with matching type</property>
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkFileChooserButton" id="btn_choose_firmware">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="title" translatable="yes">Choose CRF firmware file</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">2</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkScrolledWindow">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -475,19 +487,17 @@ with matching type</property>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">3</property>
-                        <property name="height">2</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkFileChooserButton" id="btn_choose_firmware">
+                      <object class="GtkLevelBar" id="prg_firm_upgrade_status">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="title" translatable="yes">Choose CRF firmware file</property>
+                        <property name="value">0.10000000000000001</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                        <property name="width">2</property>
+                        <property name="top_attach">4</property>
                       </packing>
                     </child>
                   </object>

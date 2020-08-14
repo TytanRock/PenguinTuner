@@ -50,7 +50,7 @@ void update_lbl()
 {
     /* Update label with our selected device */
     char labelString[100];
-    sprintf(labelString, "Selected Device:\n| Model: %s ID: %d |", _module.selected_device.model, _module.selected_device.id);
+    sprintf(labelString, "Selected Device:\n%s %d", _module.selected_device.model, _module.selected_device.id);
     gtk_label_set_text(_module.selected_device_label, labelString);
 }
 
@@ -102,6 +102,6 @@ void react_update_firmware(GtkWidget *widget, gpointer data)
 {
     const char *firmware_file = gtk_file_chooser_get_filename((GtkFileChooser *)_module.btn_firmware_file);
 
-    printf("File: %s\n", firmware_file);
+    update_device_firmware(&_module.selected_device, firmware_file, frontend_update_firm_status, frontend_callback);
 }
 

@@ -5,6 +5,7 @@
 
 #include <gtk/gtk.h>
 #include <stdio.h>
+#include <pthread.h>
 
 #define MAX_DEVICE_COUNT 30
 
@@ -13,9 +14,14 @@ static struct
     /* All the devices that are available from backend */
     can_device_t devices[MAX_DEVICE_COUNT];
     int deviceCount;
+
+    double firm_upgrade_status;
+    pthread_mutex_t firm_upgrade_mutex;
+    int firmware_upgrading;
     
     /* Gtk Widget references that matter */
     GtkTreeModel *deviceTreeModel;
+    GtkLevelBar *firmUpgradeStatus;
 }_module;
 
 gint periodic_callback(gpointer data)
@@ -62,6 +68,15 @@ gint periodic_callback(gpointer data)
             while(gtk_list_store_remove((GtkListStore *)_module.deviceTreeModel, &iter)) ;
         }
     }
+    /* Update firmware status if we're upgrading */
+    pthread_mutex_lock(&_module.firm_upgrade_mutex);
+    if(_module.firmware_upgrading)
+    {
+        gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firm_upgrade_status);
+    }
+    gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firm_upgrade_status);
+    pthread_mutex_unlock(&_module.firm_upgrade_mutex);
+
     return 1;
 }
 
@@ -92,6 +107,19 @@ void frontend_callback(backend_error err, const backend_action *action)
             }
         }
     }
+}
+
+/**
+ * This function is called during a firmware upgrade to update the frontend on the status of
+ * the upgrade. When called, we should lock a mutex, update the firmware upgrade status variable,
+ * and unlock, so that the periodic callback can pick up the new value
+ */
+void frontend_update_firm_status(double status, int stillUpgrading)
+{
+    pthread_mutex_lock(&_module.firm_upgrade_mutex);
+    _module.firmware_upgrading = stillUpgrading;
+    _module.firm_upgrade_status = status;
+    pthread_mutex_unlock(&_module.firm_upgrade_mutex);
 }
 
 int connect_all_signals(const char *ui_filename)
@@ -149,6 +177,8 @@ int connect_all_signals(const char *ui_filename)
     add_btn_firmware_file((GtkFileChooserButton *)obj);
     obj = gtk_builder_get_object(builder, "btn_update_devices");
     g_signal_connect(obj, "clicked", G_CALLBACK(react_update_firmware), NULL);
+    obj = gtk_builder_get_object(builder, "prg_firm_upgrade_status");
+    _module.firmUpgradeStatus = (GtkLevelBar *)obj;
 
     /* Connect server address and port text change to react function */
 

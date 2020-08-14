@@ -10,5 +10,6 @@
 int connect_all_signals(const char *ui_filename);
 
 void frontend_callback(backend_error err, const backend_action *action);
+void frontend_update_firm_status(double status, int stillUpgrading);
 
 #endif
