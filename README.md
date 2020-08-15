@@ -2,7 +2,7 @@
 
 This is a cross-platform GUI application designed to be used similarly to CTRE's Phoenix Tuner, which interacts with CTRE's diagnostic server to perform actions on CTRE CAN bus devices.
 
-This was made by Cory Ness, an employee of CTRE.
+This was made and is maintained by Cory Ness, an employee of CTRE. This is not supported by CTRE, any support questions/feature requests regarding Penguin Tuner should be made in this repository's issue tracker.
 
 Due to licensing concerns, only the GUI application will be open-sourced.
 The backend of this application, the stuff that deals with communicating to diagnostic server, will be provided via a shared-object and linked into the application.
