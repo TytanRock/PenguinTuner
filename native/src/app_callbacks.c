@@ -16,7 +16,6 @@ static struct
     int deviceCount;
 
     double firm_upgrade_status;
-    pthread_mutex_t firm_upgrade_mutex;
     int firmware_upgrading;
     
     /* Gtk Widget references that matter */
@@ -24,6 +23,7 @@ static struct
     GtkLevelBar *firmUpgradeStatus;
 }_module;
 
+int count = 0;
 gint periodic_callback(gpointer data)
 {
     /* Update devices */
@@ -69,13 +69,7 @@ gint periodic_callback(gpointer data)
         }
     }
     /* Update firmware status if we're upgrading */
-    pthread_mutex_lock(&_module.firm_upgrade_mutex);
-    if(_module.firmware_upgrading)
-    {
-        gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firm_upgrade_status);
-    }
-    gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firm_upgrade_status);
-    pthread_mutex_unlock(&_module.firm_upgrade_mutex);
+    gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firmware_upgrading ? _module.firm_upgrade_status : 0);
 
     return 1;
 }
@@ -116,10 +110,8 @@ void frontend_callback(backend_error err, const backend_action *action)
  */
 void frontend_update_firm_status(double status, int stillUpgrading)
 {
-    pthread_mutex_lock(&_module.firm_upgrade_mutex);
     _module.firmware_upgrading = stillUpgrading;
     _module.firm_upgrade_status = status;
-    pthread_mutex_unlock(&_module.firm_upgrade_mutex);
 }
 
 int connect_all_signals(const char *ui_filename)
