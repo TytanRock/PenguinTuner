@@ -19,19 +19,13 @@ jobs:
     - name: make
       run: ./build.sh
   
-  # Once the project is built, upload the binary 
-  upload:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: tar
-        run: tar -cvf PenguinTuner.tar ./build/MainApp.ui ./build/PenguinTuner
-        
-      - name: upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: PenguinTuner
-          path: PenguinTuner.tar   
+    # Once the project is built, upload the binary 
+    - name: tar
+      run: tar -cvf PenguinTuner.tar ./build/MainApp.ui ./build/PenguinTuner    
+    - name: upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: PenguinTuner
+        path: PenguinTuner.tar   
     
       
