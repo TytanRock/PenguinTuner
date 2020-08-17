@@ -20,8 +20,10 @@ jobs:
       run: ./build.sh
   
     # Once the project is built, upload the binary 
+    - name: 'put together'
+      run: cp ./build/MainApp.ui .; cp ./build/PenguinTuner .; cp ./backend/lib/libPenguin_Backend.so .
     - name: tar
-      run: tar -cvf PenguinTuner.tar ./build/MainApp.ui ./build/PenguinTuner    
+      run: tar -cvf PenguinTuner.tar MainApp.ui libPenguin_Backend.so PenguinTuner    
     - name: upload
       uses: actions/upload-artifact@v2
       with:
