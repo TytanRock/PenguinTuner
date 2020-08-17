@@ -1,3 +1,5 @@
+![C/C++ CI](https://github.com/TytanRock/PenguinTuner/workflows/C/C++%20CI/badge.svg)
+
 # Penguin Tuner
 
 This is a cross-platform GUI application designed to be used similarly to CTRE's Phoenix Tuner, which interacts with CTRE's diagnostic server to perform actions on CTRE CAN bus devices.
