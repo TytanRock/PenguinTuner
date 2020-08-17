@@ -8,7 +8,9 @@ find_package(PkgConfig REQUIRED)
 find_package(CURL REQUIRED)
 pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 include_directories(${GTK3_INCLUDE_DIRS})
-link_directories(${GTK3_LIBRARY_DIRS})
+
+add_library(Penguin_Backend SHARED IMPORTED)
+set_property(TARGET Penguin_Backend PROPERTY IMPORTED_LOCATION "backend/lib/libPenguin_Backend.so")
 
 add_definitions(${GTK3_CFLAGS_OTHER})
 
