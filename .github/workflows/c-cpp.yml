@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
+  # Build the project and ensure it compiles
   build:
 
     runs-on: ubuntu-latest
@@ -17,7 +18,20 @@ jobs:
       run: ./configure
     - name: make
       run: ./build.sh
-#    - name: make check
-#      run: make check
-#    - name: make distcheck
-#      run: make distcheck
+  
+  # Once the project is built, upload the binary 
+  upload:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: tar
+        run: tar -cvf PenguinTuner.tar ./build/MainApp.ui ./build/PenguinTuner
+        
+      - name: upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: PenguinTuner
+          path: PenguinTuner.tar   
+    
+      
