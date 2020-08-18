@@ -16,18 +16,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: configure
       run: ./configure
-    - name: make
-      run: ./build.sh
+    - name: 'build and package'
+      run: ./package.sh
   
-    # Once the project is built, upload the binary 
-    - name: 'put together'
-      run: cp ./build/MainApp.ui .; cp ./build/PenguinTuner .; cp ./backend/lib/libPenguin_Backend.so .
-    - name: tar
-      run: tar -cvf PenguinTuner.tar MainApp.ui libPenguin_Backend.so PenguinTuner    
+    # Once the project is built, upload the deb package   
     - name: upload
       uses: actions/upload-artifact@v2
       with:
         name: PenguinTuner
-        path: PenguinTuner.tar   
+        path: build/PenguinTuner*.deb
     
       
