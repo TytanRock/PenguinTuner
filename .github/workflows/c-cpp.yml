@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
+  # Build the project and ensure it compiles
   build:
 
     runs-on: ubuntu-latest
@@ -15,9 +16,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: configure
       run: ./configure
-    - name: make
-      run: ./build.sh
-#    - name: make check
-#      run: make check
-#    - name: make distcheck
-#      run: make distcheck
+    - name: 'build and package'
+      run: ./package.sh
+  
+    # Once the project is built, upload the deb package   
+    - name: upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: PenguinTuner
+        path: build/PenguinTuner*.deb
+    
+      

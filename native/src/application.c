@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
 
     gtk_init(&argc, &argv);
     
-    connect_all_signals("MainApp.ui");
+    connect_all_signals();
 
     gtk_main();
 

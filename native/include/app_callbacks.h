@@ -7,7 +7,7 @@
  * Connect all signals from the UI xml file specified
  * Returns: 0 if success, nonzero otherwise
  */
-int connect_all_signals(const char *ui_filename);
+int connect_all_signals();
 
 void frontend_callback(backend_error err, const backend_action *action);
 void frontend_update_firm_status(double status, int stillUpgrading);
