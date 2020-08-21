@@ -165,14 +165,21 @@ int connect_all_signals()
     /* Connect device stuff to can_devices file */
     obj = gtk_builder_get_object(builder, "btn_change_id");
     g_signal_connect(obj, "clicked", G_CALLBACK(react_changed_id), NULL);
+    obj = gtk_builder_get_object(builder, "btn_update_devices");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_update_firmware), NULL);
+    obj = gtk_builder_get_object(builder, "btn_change_name");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_changed_name), NULL);
+    obj = gtk_builder_get_object(builder, "btn_blink");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_blink_device), NULL);
+    
     obj = gtk_builder_get_object(builder, "txt_device_id");
     add_txt_change_id((GtkSpinButton *)obj);
     obj = gtk_builder_get_object(builder, "btn_choose_firmware");
     add_btn_firmware_file((GtkFileChooserButton *)obj);
-    obj = gtk_builder_get_object(builder, "btn_update_devices");
-    g_signal_connect(obj, "clicked", G_CALLBACK(react_update_firmware), NULL);
     obj = gtk_builder_get_object(builder, "prg_firm_upgrade_status");
     _module.firmUpgradeStatus = (GtkLevelBar *)obj;
+    obj = gtk_builder_get_object(builder, "txt_device_name");
+    add_txt_device_name((GtkEntry *)obj);
 
     /* Connect server address and port text change to react function */
 

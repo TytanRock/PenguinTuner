@@ -9,6 +9,7 @@ static struct
     GtkLabel *selected_device_label;
     GtkSpinButton *txt_dev_id;
     GtkFileChooserButton *btn_firmware_file;
+    GtkEntry *txt_device_name;
 
     can_device_t selected_device;
 }_module;
@@ -35,6 +36,12 @@ void add_btn_firmware_file(GtkFileChooserButton *btn)
 {
     _module.btn_firmware_file = btn;
 }
+
+void add_txt_device_name(GtkEntry *entry)
+{
+    _module.txt_device_name = entry;
+}
+
 
 can_device_t get_selected_device()
 {
@@ -65,17 +72,18 @@ void react_changed_device(GtkWidget *widget, gpointer data)
             GValue value = G_VALUE_INIT;
             gtk_tree_model_get_value(tree, &iter, 0, &value); /* Device Name */
             strcpy(_module.selected_device.name, g_value_get_string(&value));
+            gtk_entry_set_text(_module.txt_device_name, g_value_get_string(&value));
             g_value_unset(&value);
         }
         {
             GValue value = G_VALUE_INIT;
-            gtk_tree_model_get_value(tree, &iter, 2, &value); /* Device Name */
+            gtk_tree_model_get_value(tree, &iter, 2, &value); /* Hardware */
             strcpy(_module.selected_device.model, g_value_get_string(&value));
             g_value_unset(&value);
         }
         {
             GValue value = G_VALUE_INIT;
-            gtk_tree_model_get_value(tree, &iter, 3, &value); /* Device Name */
+            gtk_tree_model_get_value(tree, &iter, 3, &value); /* Device ID */
             _module.selected_device.id = g_value_get_int(&value);
             g_value_unset(&value);
         }
@@ -103,5 +111,15 @@ void react_update_firmware(GtkWidget *widget, gpointer data)
     const char *firmware_file = gtk_file_chooser_get_filename((GtkFileChooser *)_module.btn_firmware_file);
 
     update_device_firmware(&_module.selected_device, firmware_file, frontend_update_firm_status, frontend_callback);
+}
+
+void react_changed_name(GtkWidget *widget, gpointer data)
+{
+    const char *new_name = gtk_entry_get_text(_module.txt_device_name);
+    set_device_name(&_module.selected_device, new_name, frontend_callback);
+}
+void react_blink_device(GtkWidget *widget, gpointer data)
+{
+    blink_device(&_module.selected_device, frontend_callback);
 }
 
