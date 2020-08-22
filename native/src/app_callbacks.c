@@ -21,6 +21,8 @@ static struct
     /* Gtk Widget references that matter */
     GtkTreeModel *deviceTreeModel;
     GtkLevelBar *firmUpgradeStatus;
+
+    GtkTextBuffer *snapshotTxt;
 }_module;
 
 int count = 0;
@@ -99,6 +101,16 @@ void frontend_callback(backend_error err, const backend_action *action)
                 dev.id = action->intParam;
                 set_selected_device(dev);
             }
+            break;
+        }
+        case Snapshot:
+        {
+            /* Get contents of string and copy it to module */
+            if(err == Ok)
+            {
+                gtk_text_buffer_set_text(_module.snapshotTxt, *((char **)action->pointerParam), -1);
+            }
+            break;
         }
     }
 }
@@ -171,6 +183,11 @@ int connect_all_signals()
     g_signal_connect(obj, "clicked", G_CALLBACK(react_changed_name), NULL);
     obj = gtk_builder_get_object(builder, "btn_blink");
     g_signal_connect(obj, "clicked", G_CALLBACK(react_blink_device), NULL);
+    /* Connect objects from the self-test snapshot page */
+    obj = gtk_builder_get_object(builder, "btn_blink_clear");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_blink_device), NULL);
+    obj = gtk_builder_get_object(builder, "btn_snapshot");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_snapshot_device), NULL); 
     
     obj = gtk_builder_get_object(builder, "txt_device_id");
     add_txt_change_id((GtkSpinButton *)obj);
@@ -180,6 +197,8 @@ int connect_all_signals()
     _module.firmUpgradeStatus = (GtkLevelBar *)obj;
     obj = gtk_builder_get_object(builder, "txt_device_name");
     add_txt_device_name((GtkEntry *)obj);
+    obj = gtk_builder_get_object(builder, "txt_device_selftest_snapshot");
+    _module.snapshotTxt = (GtkTextBuffer *)obj;
 
     /* Connect server address and port text change to react function */
 

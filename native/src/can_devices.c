@@ -122,4 +122,8 @@ void react_blink_device(GtkWidget *widget, gpointer data)
 {
     blink_device(&_module.selected_device, frontend_callback);
 }
+void react_snapshot_device(GtkWidget *widget, gpointer data)
+{
+    get_device_snapshot(&_module.selected_device, frontend_callback);
+}
 
