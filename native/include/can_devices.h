@@ -19,6 +19,7 @@ void react_update_firmware(GtkWidget *widget, gpointer data);
 void react_changed_name(GtkWidget *widget, gpointer data);
 void react_blink_device(GtkWidget *widget, gpointer data);
 void react_snapshot_device(GtkWidget *widget, gpointer data);
+void react_default_device(GtkWidget *widget, gpointer data);
 
 #endif
 

@@ -188,6 +188,8 @@ int connect_all_signals()
     g_signal_connect(obj, "clicked", G_CALLBACK(react_blink_device), NULL);
     obj = gtk_builder_get_object(builder, "btn_snapshot");
     g_signal_connect(obj, "clicked", G_CALLBACK(react_snapshot_device), NULL); 
+    obj = gtk_builder_get_object(builder, "btn_factory_default");
+    g_signal_connect(obj, "clicked", G_CALLBACK(react_default_device), NULL);
     
     obj = gtk_builder_get_object(builder, "txt_device_id");
     add_txt_change_id((GtkSpinButton *)obj);

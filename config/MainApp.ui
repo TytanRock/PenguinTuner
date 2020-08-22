@@ -641,8 +641,8 @@ with matching type</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_copy_to_clipboard">
-                    <property name="label" translatable="yes">Copy to Clipboard</property>
+                  <object class="GtkButton" id="btn_factory_default">
+                    <property name="label" translatable="yes">Factory Default</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>

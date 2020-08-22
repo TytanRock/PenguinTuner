@@ -25,6 +25,7 @@ typedef enum _action_type
     Set_Name,
     Blink,
     Snapshot,
+    FactoryDefault,
     Update_Firmware,
     Get_Firm_status,
 }action_type;
@@ -72,6 +73,7 @@ backend_error set_device_id(const can_device_t *device, int id, backend_callback
 backend_error set_device_name(const can_device_t *device, const char *name, backend_callback callback);
 backend_error blink_device(const can_device_t *device, backend_callback callback);
 backend_error get_device_snapshot(const can_device_t *device, backend_callback callback);
+backend_error factory_default_device(const can_device_t *device, backend_callback callback);
 
 backend_error update_device_firmware(const can_device_t *device, const char *firmware_file, void (*firm_upgrade_callback)(double, int), backend_callback callback);
 
