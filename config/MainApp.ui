@@ -53,6 +53,7 @@
       </row>
     </data>
   </object>
+  <object class="GtkTextBuffer" id="txt_device_selftest_snapshot"/>
   <object class="GtkListStore" id="txt_ip_address_completion_values">
     <columns>
       <!-- column-name Default -->
@@ -613,12 +614,13 @@ with matching type</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkTextView" id="txt_device_selftest_snapshot">
+                  <object class="GtkTextView">
                     <property name="height_request">300</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
+                    <property name="buffer">txt_device_selftest_snapshot</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -639,8 +641,8 @@ with matching type</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_copy_to_clipboard">
-                    <property name="label" translatable="yes">Copy to Clipboard</property>
+                  <object class="GtkButton" id="btn_factory_default">
+                    <property name="label" translatable="yes">Factory Default</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
