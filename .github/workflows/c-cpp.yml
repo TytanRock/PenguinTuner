@@ -40,6 +40,9 @@ jobs:
       - name: Import GPG key to sign package release
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v2
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
         
       - name: Download previous job artifact
         uses: actions/download-artifact@v2
