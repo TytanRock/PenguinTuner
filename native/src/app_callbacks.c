@@ -69,6 +69,7 @@ gint periodic_callback(gpointer data)
         if(validIter) {
             while(gtk_list_store_remove((GtkListStore *)_module.deviceTreeModel, &iter)) ;
         }
+        react_changed_device(NULL, NULL); // Update selected device to fix some issues
     }
     /* Update firmware status if we're upgrading */
     gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firmware_upgrading ? _module.firm_upgrade_status : 0);
