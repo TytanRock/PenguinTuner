@@ -40,3 +40,17 @@ Section: devel
 Priority: optional
 Description: PenguinTuner built using CMake
 
+Package: penguintuner
+Version: 0.3.1
+Architecture: amd64
+Maintainer: TytanRock
+Installed-Size: 210
+Filename: ./PenguinTuner-0.3.1-Linux.deb
+Size: 64960
+MD5sum: fed789d66b0d14bb41b4ec0daa3076cd
+SHA1: 3c52b6d25aef6d246f6f5129453dccd73ed81129
+SHA256: 09350e6e56f2750dfffdbdbba723267b1cc346bcbeb59dda7dbbf47dcacaa498
+Section: devel
+Priority: optional
+Description: PenguinTuner built using CMake
+
