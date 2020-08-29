@@ -46,10 +46,10 @@ Architecture: amd64
 Maintainer: TytanRock
 Installed-Size: 210
 Filename: ./PenguinTuner-0.3.1-Linux.deb
-Size: 64960
-MD5sum: fed789d66b0d14bb41b4ec0daa3076cd
-SHA1: 3c52b6d25aef6d246f6f5129453dccd73ed81129
-SHA256: 09350e6e56f2750dfffdbdbba723267b1cc346bcbeb59dda7dbbf47dcacaa498
+Size: 64962
+MD5sum: 434fc016b3373a56d1d1cbc9cb010670
+SHA1: b4c066e1a3cb7ce4d32dd9b865fcb0669798a180
+SHA256: 55602a200e9d19129fd4026639fb913ea117384f5e04515101c8b85da12b1659
 Section: devel
 Priority: optional
 Description: PenguinTuner built using CMake
