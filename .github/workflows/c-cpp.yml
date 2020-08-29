@@ -33,10 +33,24 @@ jobs:
     # Release the version if it includes a tag that starts with "v"
     if: success() && startsWith(github.ref, 'refs/tags/v')
     steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+      - name: Import GPG key to sign package release
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v2
+        
       - name: Download previous job artifact
         uses: actions/download-artifact@v2
         with:
           name: PenguinTuner
+      
+      - name: Create Pacakges & Packages.gz files
+        run: dpkg-scanpackages --multiversion . > Packages; gzip -k -f Packages
+        
+      - name: Create Release, Release.gpg, and InRelease files
+        run: apt-ftparchive release . > Release; gpg --default-key "coryness@tytan.rocks" -abs -o - Release > Release.gpg; gpg --default-key "coryness@tytan.rocks" --clearsign -o - Release > InRelease
+        
       - name: Check directory
         run: ls -R
-      
