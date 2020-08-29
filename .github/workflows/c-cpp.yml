@@ -38,7 +38,6 @@ jobs:
         with:
           ref: gh-pages
       - name: Import GPG key to sign package release
-        id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v2
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -50,10 +49,33 @@ jobs:
           name: PenguinTuner
       
       - name: Create Pacakges & Packages.gz files
-        run: dpkg-scanpackages --multiversion . > Packages; gzip -k -f Packages
+        run: |
+          dpkg-scanpackages --multiversion . > Packages
+          gzip -k -f Packages
         
       - name: Create Release, Release.gpg, and InRelease files
-        run: apt-ftparchive release . > Release; gpg --default-key "coryness@tytan.rocks" -abs -o - Release > Release.gpg; gpg --default-key "coryness@tytan.rocks" --clearsign -o - Release > InRelease
+        run: |
+          apt-ftparchive release . > Release
+          gpg --default-key "coryness@tytan.rocks" -abs -o - Release > Release.gpg
+          gpg --default-key "coryness@tytan.rocks" --clearsign -o - Release > InRelease
         
-      - name: Check directory
-        run: ls -R
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Update GH-Pages with latest release" -a
+          
+      - name: Push to gh-pages branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          
+      - name: Create a new Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }} Release
+          draft: true
