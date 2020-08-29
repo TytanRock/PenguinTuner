@@ -25,5 +25,14 @@ jobs:
       with:
         name: PenguinTuner
         path: build/PenguinTuner*.deb
-    
+
+  release:
+    runs-on: ubuntu-latest
+    # Release the version if it includes a tag that starts with "v"
+    if: success() && startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Download previous job artifact
+        uses: actions/download-artifact@v2
+      - name: Check directory
+        run: ls -R
       
