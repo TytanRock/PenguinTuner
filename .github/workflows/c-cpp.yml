@@ -36,7 +36,10 @@ jobs:
         with:
           name: PenguinTuner
       - name: Install necessary dependencies to run the test
-        run: Xvnc :1 &
+        run: |
+          sudo apt install xvfb
+          Xvfb :1 &
+          export DISPLAY=:1
       - name: Install the package on the clean container
         run: sudo apt install ./PenguinTuner*.deb
       - name: Run the app for 10 seconds to ensure everything it needs has been installed
