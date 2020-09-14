@@ -26,6 +26,16 @@ jobs:
       with:
         name: PenguinTuner
         path: build/PenguinTuner*.deb
+  
+  verify-install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download previous job artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: PenguinTuner
+      - name: Install the package on the clean container
+        run: sudo apt install ./PenguinTuner*.deb
 
   release:
     runs-on: ubuntu-latest
