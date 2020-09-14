@@ -37,6 +37,8 @@ jobs:
           name: PenguinTuner
       - name: Install the package on the clean container
         run: sudo apt install ./PenguinTuner*.deb
+      - name: Run the app for 10 seconds to ensure everything it needs has been installed
+        run: timeout 10s PenguinTuner
 
   release:
     runs-on: ubuntu-latest
