@@ -38,7 +38,7 @@ jobs:
       - name: Install necessary dependencies to run the test
         run: |
           sudo apt install xvfb
-          Xvfb :1 &
+          Xvfb :1 -screen 0 1x1x8 &
           export DISPLAY=:1
       - name: Install the package on the clean container
         run: sudo apt install ./PenguinTuner*.deb
