@@ -40,7 +40,7 @@ jobs:
       - name: Install the package on the clean container
         run: sudo apt install ./PenguinTuner*.deb
       - name: Run the app for 10 seconds to ensure everything it needs has been installed
-        run: xvfb-run -a timeout --preserve-status 10s PenguinTuner
+        run: timeout --preserve-status 10s xvfb-run -a PenguinTuner
 
   release:
     runs-on: ubuntu-latest
