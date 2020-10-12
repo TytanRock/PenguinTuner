@@ -36,14 +36,11 @@ jobs:
         with:
           name: PenguinTuner
       - name: Install necessary dependencies to run the test
-        run: |
-          sudo apt install xvfb
-          Xvfb :1 -screen 0 1x1x8 &
-          export DISPLAY=:1
+        run: sudo apt install xvfb
       - name: Install the package on the clean container
         run: sudo apt install ./PenguinTuner*.deb
       - name: Run the app for 10 seconds to ensure everything it needs has been installed
-        run: timeout 10s PenguinTuner
+        run: xvfb-run -a timeout 10s PenguinTuner
 
   release:
     runs-on: ubuntu-latest
