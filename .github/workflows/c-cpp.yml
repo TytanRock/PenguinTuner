@@ -40,7 +40,7 @@ jobs:
       - name: Install the package on the clean container
         run: sudo apt install ./PenguinTuner*.deb
       - name: Run the app for 10 seconds to ensure everything it needs has been installed
-        run: \
+        run: |
           xvfb-run -a PenguinTuner &
           CHILD_PID=$!
           sleep 10
