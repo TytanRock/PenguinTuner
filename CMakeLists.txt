@@ -59,7 +59,7 @@ create_resources(${CMAKE_SOURCE_DIR}/config ${CMAKE_CURRENT_BINARY_DIR}/resource
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${CMAKE_CURRENT_BINARY_DIR}/resources.c ${INCLUDE_DIR})
 
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/config/MainApp.ui .)
-add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD COMMAND objcopy --input binary --output elf32-i386 --binary-architecture i386 MainApp.ui ${CMAKE_CURRENT_BINARY_DIR}/MainApp.o)
+add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ld -r -b binary MainApp.ui -o ${CMAKE_CURRENT_BINARY_DIR}/MainApp.o)
 
 # Copy config files for styling the widgets
 target_link_libraries(${PROJECT_NAME} ${GTK3_LIBRARIES})
