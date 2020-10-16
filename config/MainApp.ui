@@ -36,22 +36,6 @@
       <!-- column-name Firmware -->
       <column type="gchararray"/>
     </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">TestID</col>
-        <col id="1" translatable="yes">TestStatus</col>
-        <col id="2" translatable="yes">TestHardware</col>
-        <col id="3">0</col>
-        <col id="4" translatable="yes">0.0.0.0</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Test2</col>
-        <col id="1" translatable="yes">Also Status</col>
-        <col id="2" translatable="yes">Canifier?</col>
-        <col id="3">3</col>
-        <col id="4" translatable="yes">0.1.0.0</col>
-      </row>
-    </data>
   </object>
   <object class="GtkTextBuffer" id="txt_device_selftest_snapshot"/>
   <object class="GtkListStore" id="txt_ip_address_completion_values">
@@ -73,16 +57,9 @@
     <property name="inline_completion">True</property>
   </object>
   <object class="GtkTextBuffer" id="txtbuf_robot_controller_about">
-    <property name="text">Phoenix Tuner provides field-upgrade, configuration, and self-test for CTRE CAN Devices by communicating with a software library called Phoenix Diagnostics Server (linked into your roboRIO application).  The Phoenix Diagnostics Server runs as part of any 2020 or later FRC robot project that uses Phoenix API.
+    <property name="text">Penguin Tuner currently provides field-upgrade, start-up configuration, and self-test snapshot for CTRE CAN Devices by communicating with a software library called Phoenix Diagnostics Server (linked into your robot application).
 
-Alternatively, a Temporary Diagnostic Server can be deployed in place of a robot project by pressing the Run Temporary Diagnostic Server button.
-This will stop your robot project - Phoenix Diagnostic Server will be running instead.  To restore RoboRIO startup behavior, use the respective Restart Robot Code button.  LabVIEW teams can instead press Run-As-Startup.  Always power-cycle and test your application before each match.
-
-You may enter your team number or roboRIO IP address for server address, this is necessary to connect wirelessly to your robot.  Tuner will react automatically when you change the server address and save it persistently.
-
-To install on a non-FRC platform, connect a supported Linux platform to the PC and enter the IP address in the server address drop down below.  Then press Install Phoenix Library/Diagnostics.  This will install the Phoenix Diagnostics server.
-To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
-</property>
+You may enter your team number or roboRIO IP address for server address, this is necessary to connect wirelessly to your robot.  Tuner will react automatically when you change the server address.</property>
   </object>
   <object class="GtkTextBuffer" id="txtbuf_robot_controller_status"/>
   <object class="GtkWindow" id="window">
@@ -146,10 +123,12 @@ To uninstall the Diagnostics server, press Uninstall Phoenix Diagnostics.
                 </child>
                 <child>
                   <object class="GtkButton" id="btn_run_temporary_diag_server">
-                    <property name="label" translatable="yes">Run Temporary Diagnostic Server</property>
+                    <property name="label" translatable="yes">Run Temporary Diagnostic Server
+(Not Implemented)</property>
                     <property name="width_request">280</property>
                     <property name="height_request">95</property>
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="valign">start</property>
