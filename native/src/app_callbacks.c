@@ -89,30 +89,34 @@ void application_close(void)
  * This function gets called when backend has finished performing an action
  * This allows the form to get the response of an action
  */
-void frontend_callback(backend_error err, const backend_action *action)
+gboolean frontend_gui_callback(gpointer user_data)
 {
+    const backend_action *action = user_data;
+
     switch(action->action)
     {
         case Set_ID:
         {
-            if(err == Ok)
-            {
-                /* Update selected device to use newest ID */
-                can_device_t dev = get_selected_device();
-                dev.id = action->intParam;
-                set_selected_device(dev);
-            }
+            /* Update selected device to use newest ID */
+            can_device_t dev = get_selected_device();
+            dev.id = action->intParam;
+            set_selected_device(dev);
             break;
         }
         case Snapshot:
         {
             /* Get contents of string and copy it to module */
-            if(err == Ok)
-            {
-                gtk_text_buffer_set_text(_module.snapshotTxt, *((char **)action->pointerParam), -1);
-            }
+            gtk_text_buffer_set_text(_module.snapshotTxt, *((char **)action->pointerParam), -1);
             break;
         }
+    }
+    return G_SOURCE_REMOVE;
+}
+void frontend_callback(backend_error err, const backend_action *action)
+{
+    if(err == Ok)
+    {
+        g_idle_add(frontend_gui_callback, (void *)action);
     }
 }
 
