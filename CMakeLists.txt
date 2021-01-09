@@ -1,5 +1,5 @@
 # Specify minimum required version of CMake
-cmake_minimum_required (VERSION 3.0 )
+cmake_minimum_required (VERSION 3.0)
 
 file(READ "version.txt" ver)
 string(REGEX MATCH "VERSION_MAJOR ([0-9]*)" _ ${ver})
@@ -12,7 +12,6 @@ set(patch ${CMAKE_MATCH_1})
 # Project name
 project (PenguinTuner LANGUAGES C VERSION "${major}.${minor}.${patch}")
 
-
 message("version: ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 find_package(PkgConfig REQUIRED)
@@ -21,7 +20,7 @@ pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 include_directories(${GTK3_INCLUDE_DIRS})
 
 add_library(Penguin_Backend SHARED IMPORTED)
-set_property(TARGET Penguin_Backend PROPERTY IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/backend/lib/libPenguin_Backend.so")
+set_property(TARGET Penguin_Backend PROPERTY IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/backend/lib/$ENV{TARGET_ARCHITECTURE}/libPenguin_Backend.so")
 
 add_definitions(${GTK3_CFLAGS_OTHER})
 
@@ -61,15 +60,18 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${CMAKE_CURRENT_BINARY_DIR}/resou
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/config/MainApp.ui .)
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ld -r -b binary MainApp.ui -o ${CMAKE_CURRENT_BINARY_DIR}/MainApp.o)
 
+message("GTK Libraries: ${GTK3_LIBRARIES}")
+message("CURL Libs: ${CURL_LIBRARIES}")
+
 # Copy config files for styling the widgets
 target_link_libraries(${PROJECT_NAME} ${GTK3_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} "${CMAKE_SOURCE_DIR}/backend/lib/libPenguin_Backend.so")
+target_link_libraries(${PROJECT_NAME} "${CMAKE_SOURCE_DIR}/backend/lib/$ENV{TARGET_ARCHITECTURE}/libPenguin_Backend.so")
 target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 
 install(TARGETS PenguinTuner
     DESTINATION bin
 )
-install(FILES "${CMAKE_SOURCE_DIR}/backend/lib/libPenguin_Backend.so"
+install(FILES "${CMAKE_SOURCE_DIR}/backend/lib/$ENV{TARGET_ARCHITECTURE}/libPenguin_Backend.so"
     DESTINATION lib
 )
 
