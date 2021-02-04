@@ -1,4 +1,9 @@
 *build/*
 *.swp
 *.*~
+debian/.debhelper/
+debian/penguintuner.debhelper.log
+debian/penguintuner.substvars
+debian/penguintuner/
+obj-x86_64-linux-gnu/
 
