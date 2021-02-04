@@ -114,6 +114,14 @@ void frontend_callback(backend_error err, const backend_action *action)
             }
             break;
         }
+	case No_Action:
+        case Set_Name:
+	case Blink:
+	case FactoryDefault:
+	case Update_Firmware:
+	case Get_Firm_status:
+	    /* These actions don't do anything */
+	    break;
     }
 }
 
