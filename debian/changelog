@@ -1,0 +1,6 @@
+penguintuner (0.3.2) stable; urgency=low
+
+  * Change build system to meson
+
+ -- Cory Ness <coryness@tytan.rocks>  Wed, 2 Mar 23:00:00 -0500
+

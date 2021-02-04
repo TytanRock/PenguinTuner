@@ -1,0 +1,12 @@
+Source: penguintuner
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Section: electronics
+Priority: optional
+Standards-Version: 4.5.1
+Homepage: https://penguintuner.tytan.rocks
+
+Package: penguintuner
+Architecture: any-amd64
+Depends: ${shlibs:Depends}
+Description: A GUI application to interact with CTRE CAN devices using CTRE's Diagnostic Server
+

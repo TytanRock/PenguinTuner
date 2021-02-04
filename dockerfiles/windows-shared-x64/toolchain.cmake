@@ -1,3 +1,0 @@
-set(CMAKE_LIBRARY_ARCHITECTURE "amd64")
-set(CMAKE_PREFIX_PATH "/usr/")
-

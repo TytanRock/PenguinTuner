@@ -1,4 +1,4 @@
-project('PenguinTuner', 'c')
+project('penguintuner', 'c', version: '0.3.2')
 cc = meson.get_compiler('c')
 gnome = import('gnome')
 
@@ -21,5 +21,11 @@ inc = include_directories([	'include',
 gresources = gnome.compile_resources(	'app_resources_ui', 
 					'src/app_resources_ui.gresource.xml',
 					source_dir: 'src')
-executable(meson.project_name(), gresources, src, include_directories : inc, dependencies : [gtkdep, curldep, backend])
+executable(meson.project_name(), 
+           gresources, 
+           src, 
+           include_directories : inc, 
+           dependencies : [gtkdep, curldep, backend],
+           install: true,
+           install_dir: '/usr/bin')
 
