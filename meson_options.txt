@@ -1,0 +1,2 @@
+option('host_arch', type: 'string', value: 'amd64', description: 'Architecture to build for')
+

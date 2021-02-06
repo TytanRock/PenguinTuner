@@ -2,6 +2,8 @@ project('penguintuner', 'c', version: '0.3.2')
 cc = meson.get_compiler('c')
 gnome = import('gnome')
 
+architecture = get_option('host_arch')
+
 gtkdep = dependency('gtk+-3.0')
 curldep = dependency('libcurl')
 glibdep = dependency('glib-2.0')
@@ -14,7 +16,7 @@ src = [	'src/application.c',
 inc = include_directories(['include',
                            'backend/headers'])
 
-backend = 'backend/lib/linux-armv7/libPenguin_Backend.so'
+backend = 'backend/lib' / architecture / 'libPenguin_Backend.so'
 
 gresources = gnome.compile_resources(	'app_resources_ui', 
 					'src/app_resources_ui.gresource.xml',
