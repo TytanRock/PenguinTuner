@@ -21,6 +21,7 @@ backend = 'backend/lib' / architecture / 'libPenguin_Backend.so'
 gresources = gnome.compile_resources(	'app_resources_ui', 
 					'src/app_resources_ui.gresource.xml',
 					source_dir: 'src')
+
 executable(meson.project_name(), 
            gresources, 
            src, 
@@ -29,4 +30,6 @@ executable(meson.project_name(),
            install: true,
            install_dir: '/usr/bin',
            objects: backend)
+
+install_data(backend, install_dir: '/usr/lib')
 

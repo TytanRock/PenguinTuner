@@ -1,6 +1,4 @@
 #!/bin/sh
 
-./build.sh
-cd build
-cpack
+dpkg-buildpackage
 

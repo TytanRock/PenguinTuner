@@ -7,8 +7,11 @@ export DESTROOT=$(CURDIR)/debian/penguintuner
 %:
 	dh $@
 
+clean:
+	rm -rf build
+	rm -rf obj-x86_64-linux-gnu
+	dh clean
+
 override_dh_auto_install:
 	dh_auto_install
-	install -p -D -m 0755 obj-x86_64-linux-gnu/penguintuner $(DESTROOT)/usr/bin/penguintuner
-	install -p -D -m 0644 backend/lib/linux-x64/libPenguin_Backend.so $(DESTROOT)/usr/lib/libPenguin_Backend.so
-
+	cd build; meson install
