@@ -1,7 +1,4 @@
 #!/bin/sh
 
-rm -rf build
-meson setup build
-cd build
-ninja
+./amd64-build.sh
 

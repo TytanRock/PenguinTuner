@@ -6,5 +6,5 @@ debian/penguintuner.debhelper.log
 debian/penguintuner.substvars
 debian/penguintuner/
 debian/files
-obj-x86_64-linux-gnu/
+obj-*
 

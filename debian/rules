@@ -7,11 +7,18 @@ export DESTROOT=$(CURDIR)/debian/penguintuner
 %:
 	dh $@
 
-clean:
-	rm -rf build
-	rm -rf obj-x86_64-linux-gnu
-	dh clean
+override_dh_clean:
+	rm -rf obj-*
+	dh_clean
+	dh_auto_clean
+
+#override_dh_build:
+#ifeq "${HOST_ARCH}" ""
+#	./build.sh
+#else
+#	./${HOST_ARCH}-build.sh
+#endif
 
 override_dh_auto_install:
 	dh_auto_install
-	cd build; meson install
+	cd obj* && meson install
