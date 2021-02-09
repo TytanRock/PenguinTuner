@@ -45,7 +45,7 @@ jobs:
       - name: Download previous job artifact
         uses: actions/download-artifact@v2
         with:
-          name: PenguinTuner
+          name: PenguinTuner_Packages
       - name: Install necessary dependencies to run the test
         run: sudo apt install xvfb
       - name: Install the package on the clean container
