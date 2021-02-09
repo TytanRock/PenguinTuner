@@ -24,9 +24,9 @@ jobs:
         apt install -y libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf
         pip3 install ninja
     - name: 'build and package native'
-      run: dpkg-buildpackage -rsudo
+      run: dpkg-buildpackage
     - name: 'build and package armhf'
-      run: CONFIG_SITE=/etc/dpkg-cross/cross-config.armhf DH_MESON_CROSS_FILE=armhf.ini dpkg-buildpackage -aarmhf -r'sudo --preserve-env=DEB_HOST_ARCH' -Pcross
+      run: CONFIG_SITE=/etc/dpkg-cross/cross-config.armhf DH_MESON_CROSS_FILE=armhf.ini dpkg-buildpackage -aarmhf -Pcross
   
     # Once the project is built, upload the deb package   
     - name: upload
