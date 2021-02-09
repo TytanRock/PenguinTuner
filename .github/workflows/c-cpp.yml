@@ -27,13 +27,16 @@ jobs:
       run: dpkg-buildpackage
     - name: 'build and package armhf'
       run: CONFIG_SITE=/etc/dpkg-cross/cross-config.armhf DH_MESON_CROSS_FILE=armhf.ini dpkg-buildpackage -aarmhf -Pcross
-  
+    - name: 'move debs back into home'
+      run: |
+        ls ..
+        mv ../penguintuner*.deb . 
     # Once the project is built, upload the deb package   
     - name: upload
       uses: actions/upload-artifact@v2
       with:
         name: PenguinTuner_Packages
-        path: ../penguintuner*.deb
+        path: penguintuner*.deb
   
   verify-install:
     runs-on: ubuntu-latest
