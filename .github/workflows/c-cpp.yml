@@ -12,7 +12,8 @@ jobs:
   build:
 
     runs-on: ubuntu-18.04
-
+    container:
+      image: debian
     steps:
     - uses: actions/checkout@v2
     - name: configure
@@ -20,9 +21,6 @@ jobs:
     - name: 'prepare cross-compile'
       run: |
         sudo dpkg --add-architecture armhf
-        sudo sed -i 's/deb/deb [arch=amd64]/g' /etc/apt/sources.list
-        echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic main restricted universe" | sudo tee -a /etc/apt/sources.list
-        sudo apt install -y aptitude
         sudo apt update
         sudo aptitude install -f libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf
     - name: 'build and package native'
