@@ -11,7 +11,7 @@ jobs:
   # Build the project and ensure it compiles
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
     - uses: actions/checkout@v2
@@ -20,7 +20,8 @@ jobs:
     - name: 'prepare cross-compile'
       run: |
         sudo dpkg --add-architecture armhf
-        sudo echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic main main restricted universe" >> sources.list
+        sudo sed -i 's/deb/deb [arch=amd64]/g' /etc/apt/sources.list
+        echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic main restricted universe" | sudo tee -a /etc/apt/sources.list
         sudo apt install -y aptitude
         sudo apt update
         sudo aptitude install -y libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf
