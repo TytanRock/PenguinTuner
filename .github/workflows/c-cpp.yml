@@ -18,7 +18,7 @@ jobs:
     - name: configure
       run: ./configure.sh
     - name: 'install cross packages'
-      uses: ryankurte/action-apt@v0.1
+      uses: ryankurte/action-apt@v0.3.0
       with:
         arch: armhf
         packages: "libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf"
