@@ -24,7 +24,7 @@ jobs:
         echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic main restricted universe" | sudo tee -a /etc/apt/sources.list
         sudo apt install -y aptitude
         sudo apt update
-        sudo aptitude install -y libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf
+        sudo aptitude install -f libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf
     - name: 'build and package native'
       run: dpkg-buildpackage -rsudo
     - name: 'build and package armhf'
