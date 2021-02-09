@@ -17,11 +17,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: configure
       run: ./configure.sh
-    - name: 'install cross packages'
-      uses: ryankurte/action-apt@v0.3.0
-      with:
-        arch: armhf
-        packages: "libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf"
+    - name: 'prepare cross-compile'
+      run: |
+        sudo dpkg --add-architecture armhf
+        sudo echo "deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports/ bionic main main restricted universe" >> sources.list
+        sudo apt install -y aptitude
+        sudo apt update
+        sudo aptitude install -y libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf
     - name: 'build and package native'
       run: dpkg-buildpackage -rsudo
     - name: 'build and package armhf'
