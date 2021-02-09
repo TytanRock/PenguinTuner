@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build And Package
 
 on:
   push:
@@ -17,15 +17,17 @@ jobs:
     - uses: actions/checkout@v2
     - name: configure
       run: ./configure.sh
-    - name: 'build and package'
-      run: ./package.sh
+    - name: 'build and package native'
+      run: dpkg-buildpackage -rsudo
+    - name: 'build and package armhf'
+      run: CONFIG_SITE=/etc/dpkg-cross/cross-config.armhf DH_MESON_CROSS_FILE=armhf.ini dpkg-buildpackage -aarmhf -r'sudo --preserve-env=DEB_HOST_ARCH' -Pcross
   
     # Once the project is built, upload the deb package   
     - name: upload
       uses: actions/upload-artifact@v2
       with:
-        name: PenguinTuner
-        path: build/PenguinTuner*.deb
+        name: PenguinTuner_Packages
+        path: ../penguintuner*.deb
   
   verify-install:
     runs-on: ubuntu-latest
@@ -38,10 +40,11 @@ jobs:
       - name: Install necessary dependencies to run the test
         run: sudo apt install xvfb
       - name: Install the package on the clean container
-        run: sudo apt install ./PenguinTuner*.deb
+        # Ensure we install the amd64 package, not armhf
+        run: sudo apt install ./penguintuner*amd64.deb
       - name: Run the app for 10 seconds to ensure everything it needs has been installed
         run: |
-          xvfb-run -a PenguinTuner &
+          xvfb-run -a penguintuner &
           CHILD_PID=$!
           sleep 10
           kill $CHILD_PID
