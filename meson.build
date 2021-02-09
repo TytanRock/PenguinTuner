@@ -9,7 +9,6 @@ else
 endif
 
 gtkdep = dependency('gtk+-3.0')
-curldep = dependency('libcurl')
 
 src = [	'src/application.c', 
 	'src/robot_controller.c', 
@@ -19,7 +18,7 @@ src = [	'src/application.c',
 inc = include_directories(['include',
                            'backend/headers'])
 
-backend = 'backend/lib' / architecture / 'libPenguin_Backend.so'
+backend = 'backend/lib' / architecture / 'libpenguinbackend.so'
 
 gresources = gnome.compile_resources(	'app_resources_ui', 
 					'src/app_resources_ui.gresource.xml',
@@ -31,7 +30,7 @@ executable(meson.project_name(),
            gresources, 
            src, 
            include_directories : inc, 
-           dependencies : [gtkdep, curldep],
+           dependencies : [gtkdep],
            install: true,
            install_dir: 'bin',
            objects: backend)
