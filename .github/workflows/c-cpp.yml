@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build And Package
 
 on:
   push:
@@ -11,21 +11,32 @@ jobs:
   # Build the project and ensure it compiles
   build:
 
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-18.04
+    container:
+      image: debian:latest
     steps:
     - uses: actions/checkout@v2
-    - name: configure
-      run: ./configure.sh
-    - name: 'build and package'
-      run: ./package.sh
-  
+    - name: 'prepare runner'
+      run: |
+        dpkg --add-architecture armhf
+        apt update
+        apt install -y libcurl4-openssl-dev libgtk-3-dev python3-pip meson build-essential debhelper
+        apt install -y libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf
+        pip3 install ninja
+    - name: 'build and package native'
+      run: dpkg-buildpackage
+    - name: 'build and package armhf'
+      run: CONFIG_SITE=/etc/dpkg-cross/cross-config.armhf DH_MESON_CROSS_FILE=armhf.ini dpkg-buildpackage -aarmhf -Pcross
+    - name: 'move debs back into home'
+      run: |
+        ls ..
+        mv ../penguintuner*.deb . 
     # Once the project is built, upload the deb package   
     - name: upload
       uses: actions/upload-artifact@v2
       with:
-        name: PenguinTuner
-        path: build/PenguinTuner*.deb
+        name: PenguinTuner_Packages
+        path: penguintuner*.deb
   
   verify-install:
     runs-on: ubuntu-latest
@@ -34,14 +45,15 @@ jobs:
       - name: Download previous job artifact
         uses: actions/download-artifact@v2
         with:
-          name: PenguinTuner
+          name: PenguinTuner_Packages
       - name: Install necessary dependencies to run the test
         run: sudo apt install xvfb
       - name: Install the package on the clean container
-        run: sudo apt install ./PenguinTuner*.deb
+        # Ensure we install the amd64 package, not armhf
+        run: sudo apt install ./penguintuner*amd64.deb
       - name: Run the app for 10 seconds to ensure everything it needs has been installed
         run: |
-          xvfb-run -a PenguinTuner &
+          xvfb-run -a penguintuner &
           CHILD_PID=$!
           sleep 10
           kill $CHILD_PID
