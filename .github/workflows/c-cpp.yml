@@ -15,12 +15,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: 'add architectures'
-      run: sudo dpkg --add-architecture armhf
     - name: configure
       run: ./configure.sh
-    - name: 'configure cross-compile'
-      run: sudo apt install libgtk-3-dev:armhf libcurl4-openssl-dev:armhf
+    - name: 'install cross packages'
+      uses: ryankurte/action-apt@v0.1
+      with:
+        arch: armhf
+        packages: "libgtk-3-dev:armhf libcurl4-openssl-dev:armhf crossbuild-essential-armhf"
     - name: 'build and package native'
       run: dpkg-buildpackage -rsudo
     - name: 'build and package armhf'
