@@ -54,3 +54,51 @@ Section: devel
 Priority: optional
 Description: PenguinTuner built using CMake
 
+Package: penguintuner
+Version: 0.3.3
+Architecture: armhf
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 184
+Depends: libc6 (>= 2.7), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10)
+Filename: ./penguintuner_0.3.3_armhf.deb
+Size: 48964
+MD5sum: a43552e0ae97e13a5b82626f22872e08
+SHA1: c292f8904b2bb82dc36cf3efa2347cf571add60b
+SHA256: 0ee3cab757b59a7d5ed83e84533e9bd5ee4f9b6c3dab22c56bc2a67d3ef95bfd
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
+Package: penguintuner
+Version: 0.3.3
+Architecture: amd64
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 263
+Depends: libc6 (>= 2.14), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10)
+Filename: ./penguintuner_0.3.3_amd64.deb
+Size: 68108
+MD5sum: fd4f0f57ad44357568b708751cb05ecf
+SHA1: 238789a2e9999b1a8d6aef5357f8ebe525812d55
+SHA256: 475c1fc29f545212d480c7618c955466dcc0ad29274199bc619b4d46b4b829e1
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
