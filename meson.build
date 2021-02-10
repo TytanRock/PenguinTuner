@@ -1,4 +1,4 @@
-project('penguintuner', 'c', version: '0.3.2')
+project('penguintuner', 'c', version: '0.3.3')
 cc = meson.get_compiler('c')
 gnome = import('gnome')
 

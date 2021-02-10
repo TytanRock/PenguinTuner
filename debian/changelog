@@ -1,3 +1,9 @@
+penguintuner (0.3.3) stable; urgency=low
+  
+  * Added vertical and horizontal scrollbar to selftest-snapshot for ease of scaling
+  
+ -- Cory Ness <coryness@tytan.rocks>  Tue, 9 Mar 2020 21:00:00 -0500
+
 penguintuner (0.3.2) stable; urgency=low
 
   * Change build system to meson
