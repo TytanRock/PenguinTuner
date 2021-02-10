@@ -2,11 +2,18 @@
 
 # Penguin Tuner
 
+## What is this?
 This is a cross-platform GUI application designed to be used similarly to CTRE's Phoenix Tuner, which interacts with CTRE's diagnostic server to perform actions on CTRE CAN bus devices.
 
-This was made and is maintained by Cory Ness, an employee of CTRE. This is not supported by CTRE, any support questions/feature requests regarding Penguin Tuner should be made in this repository's issue tracker.
+This was made and is maintained by Cory Ness, an employee of CTRE. This is **not** officially supported by CTRE, any support questions/feature requests regarding Penguin Tuner should be made in this repository's issue tracker.
 
-Due to licensing concerns, only the GUI application will be open-sourced.
+Here's some images of Penguin Tuner so you have an idea on what to expect when using it.
+
+![Robot Controller](https://github.com/TytanRock/PenguinTuner/blob/gh-pages/images/RobotController.png)
+![Can Devices](https://github.com/TytanRock/PenguinTuner/blob/gh-pages/images/CanDevices.png)
+![Self Test](https://github.com/TytanRock/PenguinTuner/blob/gh-pages/images/SelfTest.png)
+
+Due to licensing and IP concerns, only the GUI application will be open-sourced.
 The backend of this application, the stuff that deals with communicating to diagnostic server, will be provided via a shared-object and linked into the application.
 This allows CTRE to maintain proprietery licensing of the backend while still providing everything the community needs to use Phoenix and CTRE CAN devices in a variety of scenarios.
 
