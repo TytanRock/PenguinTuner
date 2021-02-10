@@ -1,0 +1,20 @@
+Source: penguintuner
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Section: electronics
+Priority: optional
+Standards-Version: 4.5.1
+Homepage: https://penguintuner.tytan.rocks
+
+Package: penguintuner
+Architecture: amd64 armhf
+Depends: ${shlibs:Depends}
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the 
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+

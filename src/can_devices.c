@@ -2,6 +2,7 @@
 
 #include "app_callbacks.h"
 #include "can_devices.h"
+#include <string.h>
 
 static struct
 {

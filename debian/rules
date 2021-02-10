@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+# debian/rules
+# -*- makefile -*-
+
+export DESTROOT=$(CURDIR)/debian/penguintuner
+
+%:
+	dh $@
+
+override_dh_clean:
+	rm -rf obj-*
+	rm -rf build
+	dh_clean
+	dh_auto_clean
+
+override_dh_auto_install:
+	cd obj* && meson configure -Dprefix=$(DESTROOT)/usr && ninja install
+
+override_dh_strip:
+	echo "Not stripping"
+
+#override_dh_gencontrol:
+#	DEB_HOST_ARCH=armhf dpkg-gencontrol
+

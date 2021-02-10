@@ -1,5 +1,6 @@
 #include "robot_controller.h"
 #include "backend.h"
+#include <string.h>
 
 #define MAX_IP_SIZE 40
 

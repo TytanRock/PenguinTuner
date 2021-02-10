@@ -1,0 +1,9 @@
+This is a note to myself after lots of pain trying to successfully package my cross-compiled app.
+The one-liner used to package a cross-compiled app here is below:
+
+CONFIG_SITE=/etc/dpkg-cross/cross-config.armhf DH_MESON_CROSS_FILE=armhf.ini dpkg-buildpackage -aarmhf -r'sudo --preserve-env=DEB_HOST_ARCH' -Pcross
+
+The key is to ensure that the DH_MESON_CROSS_FILE variable points to the correct cross-compile file for meson, and to preserve the DEB_HOST_ARCH env variable when sudo'ing, along with passing -aarmhf to dpkg-buildpackage to specify the correct arch
+This ensures that dh_gencontrol actually generates a package for the cross-arch, dpkg-buildpackage treats this as a cross-compiled thing, and that meson compiles for cross-arch.
+IDK if anything else is really needed, but I'm too tired to bother changing anything else.
+

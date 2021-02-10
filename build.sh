@@ -1,7 +1,4 @@
 #!/bin/sh
 
-mkdir build -p
-cd build
-cmake ..
-make
+./amd64-build.sh
 
