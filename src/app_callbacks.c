@@ -24,6 +24,9 @@ static struct
     GtkLevelBar *firmUpgradeStatus;
 
     GtkTextBuffer *snapshotTxt;
+
+    GtkLabel *serverVersion;
+    GtkLabel *serverStatus;
 }_module;
 
 int count = 0;
@@ -74,6 +77,19 @@ gint periodic_callback(gpointer data)
     }
     /* Update firmware status if we're upgrading */
     gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firmware_upgrading ? _module.firm_upgrade_status : 0);
+
+    /* Update Server Version and Status */
+    char serverVers[50];
+    get_server_version(serverVers);
+    char fullVersion[100];
+    sprintf(fullVersion, "Server Version:\n%s", serverVers);
+    gtk_label_set_text(_module.serverVersion, fullVersion);
+
+    char serverStatus[50];
+    get_server_status(serverStatus);
+    char fullStatus[100];
+    sprintf(fullStatus, "Server Status:\n%s", serverStatus);
+    gtk_label_set_text(_module.serverStatus, fullStatus);
 
     return 1;
 }
@@ -146,7 +162,7 @@ int connect_all_signals()
     GObject *obj;
     
     GBytes *resource = g_resource_lookup_data(app_resources_ui_get_resource(),
-		                              "/ui/ui/MainApp.ui",
+		                              "/ui/MainApp.ui",
 					      G_RESOURCE_LOOKUP_FLAGS_NONE,
 					      NULL);
     const char *ui = (const char*)g_bytes_get_data(resource, NULL);
@@ -223,6 +239,9 @@ int connect_all_signals()
 
     /* Get reference to the list store */
     _module.deviceTreeModel = (GtkTreeModel *)gtk_builder_get_object(builder, "lst_can_devices");
+    
+    _module.serverVersion = (GtkLabel *)gtk_builder_get_object(builder, "txt_server_version");
+    _module.serverStatus = (GtkLabel *)gtk_builder_get_object(builder, "txt_server_status");
     
     obj = gtk_builder_get_object(builder, "slct_device_selection");
     add_slct_device_selection((GtkTreeSelection *)obj);
