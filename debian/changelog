@@ -1,3 +1,10 @@
+penguintuner (0.3.4) stable; urgency=low
+
+  * Added server version getter
+  * Added server status getter
+
+ -- Cory Ness <coryness@tytan.rocks>  Sun, 14 Mar 2020 2:30:00 -0500
+
 penguintuner (0.3.3) stable; urgency=low
   
   * Added vertical and horizontal scrollbar to selftest-snapshot for ease of scaling
