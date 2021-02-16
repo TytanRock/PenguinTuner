@@ -55,7 +55,9 @@ jobs:
         with:
           name: PenguinTuner_Packages
       - name: Install necessary dependencies to run the test
-        run: sudo apt install xvfb
+        run: |
+          sudo apt update
+          sudo apt install xvfb
       - name: Install the package on the clean container
         # Ensure we install the amd64 package, not armhf
         run: sudo apt install ./penguintuner*amd64.deb
