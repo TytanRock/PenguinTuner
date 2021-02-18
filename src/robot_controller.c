@@ -7,6 +7,12 @@
 static struct {
     GtkEntry *server_ip_entry;
     GtkEntry *server_port_entry;
+    GtkEntry *ssh_username_entry;
+    GtkEntry *ssh_password_entry;
+
+    GtkCheckMenuItem *use_post_menuitem;
+    GtkCheckMenuItem *use_ssh_menuitem;
+
     GtkTextBuffer *controller_status_buffer;
 }_module;
 
@@ -28,6 +34,26 @@ void add_txt_server_port_entry(GtkEntry *entry)
 void add_txt_controller_status_buffer(GtkTextBuffer *buffer)
 {
     _module.controller_status_buffer = buffer;
+}
+
+void add_txt_ssh_username_entry(GtkEntry *entry)
+{
+    _module.ssh_username_entry = entry;
+}
+
+void add_txt_ssh_password_entry(GtkEntry *entry)
+{
+    _module.ssh_password_entry = entry;
+}
+
+void add_use_post_menuitem(GtkCheckMenuItem *menuitem)
+{
+    _module.use_post_menuitem = menuitem;
+}
+
+void add_use_ssh_menuitem(GtkCheckMenuItem *menuitem)
+{
+    _module.use_ssh_menuitem = menuitem;
 }
 
 void react_server_ip_change(GtkWidget *widget, gpointer data)
@@ -57,4 +83,38 @@ void react_server_ip_change(GtkWidget *widget, gpointer data)
     
     /* And finally call into backend to set the ip */
     set_ip(fullIp);
+}
+
+void react_use_post_select(GtkWidget *widget, gpointer data)
+{
+    if(gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget))
+    {
+        gtk_check_menu_item_set_active(_module.use_post_menuitem, TRUE);
+        gtk_check_menu_item_set_active(_module.use_ssh_menuitem, FALSE);
+    }
+}
+
+void react_use_ssh_select(GtkWidget *widget, gpointer data)
+{
+    if(gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget))
+    {
+        gtk_check_menu_item_set_active(_module.use_ssh_menuitem, TRUE);
+        gtk_check_menu_item_set_active(_module.use_post_menuitem, FALSE);
+    }
+}
+
+void get_upload_style_parameters(upload_style *style, char *username, char *password)
+{
+    upload_style usedStyle = POST;
+    if(gtk_check_menu_item_get_active(_module.use_post_menuitem))
+    {
+        usedStyle = POST;
+    }
+    else if(gtk_check_menu_item_get_active(_module.use_ssh_menuitem))
+    {
+        usedStyle = SSH;
+    }
+    *style = usedStyle;
+    strcpy(username, gtk_entry_get_text(_module.ssh_username_entry));
+    strcpy(password, gtk_entry_get_text(_module.ssh_password_entry));
 }

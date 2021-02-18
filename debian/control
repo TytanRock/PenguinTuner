@@ -6,7 +6,7 @@ Standards-Version: 4.5.1
 Homepage: https://penguintuner.tytan.rocks
 
 Package: penguintuner
-Architecture: amd64 armhf
+Architecture: amd64 armhf armel arm64
 Depends: ${shlibs:Depends}
 Description: A GUI application to interact with CTRE CAN devices
  penguintuner is a windowed application that uses CTRE's diagnostic server

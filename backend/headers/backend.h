@@ -30,6 +30,12 @@ typedef enum _action_type
     Get_Firm_status,
 }action_type;
 
+typedef enum _upload_style
+{
+    POST,
+    SSH
+}upload_style;
+
 /**
  * This is what will be passed between application and backend
  * to decide what device to interact with, and to display
@@ -78,7 +84,7 @@ backend_error blink_device(const can_device_t *device, backend_callback callback
 backend_error get_device_snapshot(const can_device_t *device, backend_callback callback);
 backend_error factory_default_device(const can_device_t *device, backend_callback callback);
 
-backend_error update_device_firmware(const can_device_t *device, const char *firmware_file, void (*firm_upgrade_callback)(double, int), backend_callback callback);
+backend_error update_device_firmware(const can_device_t *device, const char *firmware_file, void (*firm_upgrade_callback)(double, int), backend_callback callback, upload_style style, const char *username, const char *password);
 
 #endif
 

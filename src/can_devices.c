@@ -2,6 +2,7 @@
 
 #include "app_callbacks.h"
 #include "can_devices.h"
+#include "robot_controller.h"
 #include <string.h>
 
 static struct
@@ -110,8 +111,13 @@ void react_changed_id(GtkWidget *widget, gpointer data)
 void react_update_firmware(GtkWidget *widget, gpointer data)
 {
     const char *firmware_file = gtk_file_chooser_get_filename((GtkFileChooser *)_module.btn_firmware_file);
+    upload_style style;
+    char ssh_username[100];
+    char ssh_password[100];
 
-    update_device_firmware(&_module.selected_device, firmware_file, frontend_update_firm_status, frontend_callback);
+    get_upload_style_parameters(&style, ssh_username, ssh_password);
+
+    update_device_firmware(&_module.selected_device, firmware_file, frontend_update_firm_status, frontend_callback, style, ssh_username, ssh_password);
 }
 
 void react_changed_name(GtkWidget *widget, gpointer data)

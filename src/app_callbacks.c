@@ -78,18 +78,22 @@ gint periodic_callback(gpointer data)
     /* Update firmware status if we're upgrading */
     gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firmware_upgrading ? _module.firm_upgrade_status : 0);
 
-    /* Update Server Version and Status */
-    char serverVers[50];
-    get_server_version(serverVers);
-    char fullVersion[100];
-    sprintf(fullVersion, "Server Version:\n%s", serverVers);
-    gtk_label_set_text(_module.serverVersion, fullVersion);
+    /* If we're not field-upgrading, then check on the server status */
+    if(_module.firmware_upgrading == 0)
+    {
+        /* Update Server Version and Status */
+        char serverVers[50];
+        get_server_version(serverVers);
+        char fullVersion[100];
+        sprintf(fullVersion, "Server Version:\n%s", serverVers);
+        gtk_label_set_text(_module.serverVersion, fullVersion);
 
-    char serverStatus[50];
-    get_server_status(serverStatus);
-    char fullStatus[100];
-    sprintf(fullStatus, "Server Status:\n%s", serverStatus);
-    gtk_label_set_text(_module.serverStatus, fullStatus);
+        char serverStatus[50];
+        get_server_status(serverStatus);
+        char fullStatus[100];
+        sprintf(fullStatus, "Server Status:\n%s", serverStatus);
+        gtk_label_set_text(_module.serverStatus, fullStatus);
+    }
 
     return 1;
 }
@@ -147,8 +151,7 @@ void frontend_callback(backend_error err, const backend_action *action)
 
 /**
  * This function is called during a firmware upgrade to update the frontend on the status of
- * the upgrade. When called, we should lock a mutex, update the firmware upgrade status variable,
- * and unlock, so that the periodic callback can pick up the new value
+ * the upgrade. Just update the values by writing, we don't need to worry about read-modify-write conditions
  */
 void frontend_update_firm_status(double status, int stillUpgrading)
 {
@@ -207,6 +210,19 @@ int connect_all_signals()
     obj = gtk_builder_get_object(builder, "txt_selected_device");
     add_lbl_selected_device((GtkLabel *)obj);
     
+    /* Connect the widgets used to switch between POST and SSH */
+    obj = gtk_builder_get_object(builder, "chckmnu_use_post");
+    g_signal_connect(obj, "toggled", G_CALLBACK(react_use_post_select), NULL);
+    add_use_post_menuitem((GtkCheckMenuItem *)obj);
+    obj = gtk_builder_get_object(builder, "chckmnu_use_ssh");
+    g_signal_connect(obj, "toggled", G_CALLBACK(react_use_ssh_select), NULL);
+    add_use_ssh_menuitem((GtkCheckMenuItem *)obj);
+
+    obj = gtk_builder_get_object(builder, "txt_ssh_username");
+    add_txt_ssh_username_entry((GtkEntry *)obj);
+    obj = gtk_builder_get_object(builder, "txt_ssh_password");
+    add_txt_ssh_password_entry((GtkEntry *)obj);
+
     /* Connect device stuff to can_devices file */
     obj = gtk_builder_get_object(builder, "btn_change_id");
     g_signal_connect(obj, "clicked", G_CALLBACK(react_changed_id), NULL);

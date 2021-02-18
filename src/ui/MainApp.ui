@@ -69,7 +69,9 @@
   <object class="GtkTextBuffer" id="txtbuf_robot_controller_about">
     <property name="text">Penguin Tuner currently provides field-upgrade, start-up configuration, and self-test snapshot for CTRE CAN Devices by communicating with a software library called Phoenix Diagnostics Server (linked into your robot application).
 
-You may enter your team number or roboRIO IP address for server address, this is necessary to connect wirelessly to your robot.  Tuner will react automatically when you change the server address.</property>
+You may put in the roboRIO IP address for server address, this is necessary to connect wirelessly to your robot.  Tuner will react automatically when you change the server address.
+
+By default, PenguinTuner uses POST to upload files for firmware upgrade. This is known to be unreliable, but requires no knowledge of the other system. You can use SSH if you wish for a more reliable firmware upgrade, but are required to type the credentials in the lower right of this window. This program does not use these credentials for anything other than ssh'ing into your robot controller.</property>
   </object>
   <object class="GtkTextBuffer" id="txtbuf_robot_controller_status"/>
   <object class="GtkWindow" id="window">
@@ -206,6 +208,7 @@ You may enter your team number or roboRIO IP address for server address, this is
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">3</property>
+                    <property name="height">5</property>
                   </packing>
                 </child>
                 <child>
@@ -231,6 +234,50 @@ You may enter your team number or roboRIO IP address for server address, this is
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">SSH Username (If using SSH)</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">SSH Password (If using SSH)</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">6</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="txt_ssh_username">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="txt_ssh_password">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="visibility">False</property>
+                    <property name="invisible_char">●</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">7</property>
                   </packing>
                 </child>
               </object>
@@ -683,7 +730,7 @@ with matching type</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
-            <property name="top_attach">0</property>
+            <property name="top_attach">1</property>
           </packing>
         </child>
         <child>
@@ -738,7 +785,48 @@ Unknown</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkMenuBar">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkMenuItem">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">_File Upload Style</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="chckmnu_use_post">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Post (Unstable)</property>
+                        <property name="use_underline">True</property>
+                        <property name="active">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="chckmnu_use_ssh">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">SSH (Requires Credentials)</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
           </packing>
         </child>
       </object>
