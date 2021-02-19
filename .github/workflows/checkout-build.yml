@@ -1,0 +1,40 @@
+name: Checkout and Build
+# This workflow is to ensure that anybody can configure and build this project using only configure and build scripts
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: configure
+        run: ./configure.sh
+      - name: build
+        run: ./build.sh
+        
+  build-otherarch:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: armv6
+          - arch: armv7
+          - arch: aarch64
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: uraimo/run-on-arch-action@v2.0.5
+      name: build and configure
+      with:
+        arch: ${{ matrix.arch }}
+        distro: buster
+        run: |
+          ./configure.sh
+          ./build.sh
