@@ -5,7 +5,7 @@ gnome = import('gnome')
 if meson.is_cross_build()
 	architecture = meson.get_cross_property('host_arch')
 else
-	architecture = 'amd64' # Default to amd64 arch
+    architecture = get_option('architecture') 
 endif
 
 gtkdep = dependency('gtk+-3.0')
