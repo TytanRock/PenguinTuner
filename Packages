@@ -246,3 +246,99 @@ Description: A GUI application to interact with CTRE CAN devices
  penguintuner is written in C and utilizes the GTK+ toolkit for its
  interface.
 
+Package: penguintuner
+Version: 0.4.1
+Architecture: armhf
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 109
+Depends: libc6 (>= 2.7), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.1_armhf.deb
+Size: 28768
+MD5sum: 5757969bfd578d9b47fa10452fb54b2a
+SHA1: 8218d2836b2853dd614e6a259925af4bfcdc112a
+SHA256: 6d79bd799ac3725e96633205887426509727759609bfe2e62a87cf8fb76da7ef
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
+Package: penguintuner
+Version: 0.4.1
+Architecture: amd64
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 202
+Depends: libc6 (>= 2.14), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.1_amd64.deb
+Size: 53252
+MD5sum: ca4cabd2c71da8822569f5db1defd110
+SHA1: 3e01f9f9b6de079c9fa1dcdef97d493a0dbf1c6c
+SHA256: ae75248444238c53bbdecdabd286cfcf283f4f7b1425e3efa91ad68f1ed48080
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
+Package: penguintuner
+Version: 0.4.1
+Architecture: arm64
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 143
+Depends: libc6 (>= 2.17), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.1_arm64.deb
+Size: 31948
+MD5sum: e633de9fc966a93a5fd2f0a4c009cfa5
+SHA1: fa8a92dc5b1811f6859bd8a405b0f9992419088e
+SHA256: 362ff276fdc3f0a6e1b27ff7cc04eaa3674196b380c054b625f270feb6e52515
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
+Package: penguintuner
+Version: 0.4.1
+Architecture: armel
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 129
+Depends: libc6 (>= 2.7), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.1_armel.deb
+Size: 29900
+MD5sum: 702487213165489e3ad84f217a567d34
+SHA1: 5efdbf5c97a8e10e49b99ec12fb28bacc1907199
+SHA256: f25390a070720c9202a2200b3e3ca164f7e54c41cb0c24b5b0a7a9a901ea92fc
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
