@@ -16,6 +16,24 @@ typedef enum _backend_error
     /* Warnings & Errors related to the backend */
     BackendThreadStarted = -100,
     BackendThreadNotStarted = -101,
+    BackendBusy = -102,
+    ActionAlreadyOccurring = -103,
+    FilenameEmpty = -104,
+
+    /* Warnings and Errors related to Diagnostic Server */
+    InvalidServerResponse = -200,
+    FactoryUpgradeTimedOut = -201,
+
+    /* Warnings and Error related to connection style */
+    NoSSHUsername = -300,
+    FailedSshCreate = -301,
+    SSHAuthFailure = -302,
+    FailedSshChannelCreate = -303,
+    FailedCreateDir = -304,
+    FailedSshScpCreate = -305,
+    SCPNoInit = -306,
+    SCPCannotPushFile = -307,
+    NoSCPWrite = -308
 }backend_error;
 
 typedef enum _action_type

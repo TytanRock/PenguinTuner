@@ -73,8 +73,16 @@ void react_changed_device(GtkWidget *widget, gpointer data)
         {
             GValue value = G_VALUE_INIT;
             gtk_tree_model_get_value(tree, &iter, 0, &value); /* Device Name */
-            strcpy(_module.selected_device.name, g_value_get_string(&value));
-            gtk_entry_set_text(_module.txt_device_name, g_value_get_string(&value));
+            if(widget == NULL)
+            {
+                /* Don't update name, this is from the periodic refresh */
+            }
+            else
+            {
+                /* Update name, device actually changed */
+                strcpy(_module.selected_device.name, g_value_get_string(&value));
+                gtk_entry_set_text(_module.txt_device_name, g_value_get_string(&value));
+            }
             g_value_unset(&value);
         }
         {
