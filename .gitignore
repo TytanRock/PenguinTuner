@@ -2,3 +2,7 @@
 *.swp
 *.*~
 
+# GH-Pages stuff
+/_site/*
+/.sass-cache/*
+*.lock

@@ -1,0 +1,61 @@
+---
+---
+
+@import "jekyll-theme-tactile";
+
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 200px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Style page content */
+  .inner {
+    margin: 0px 160px; /* Same as the width of the sidebar */
+    width: 85%;
+    padding-left: 60px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+  @media only screen and (max-width: 767px) {
+    .sidenav {
+      left: -145px;
+      transition: 0.3s;
+      padding-top: 15px;
+      width: 165px;
+      border-radius: 0 15px 15px 0;
+      height: 300px;
+    }
+    .sidenav:hover {
+      left: 0;
+    }
+    .sidenav a {
+      font-size: 20px;
+      margin-right: 20px;
+    }
+    .inner {
+      width: 80%;
+      margin-left: 10px;
+    }
+  }
