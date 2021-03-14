@@ -18,6 +18,7 @@ static struct
 
     double firm_upgrade_status;
     int firmware_upgrading;
+    int hardUpdateNextNPasses;
     
     /* Gtk Widget references that matter */
     GtkTreeModel *deviceTreeModel;
@@ -73,7 +74,8 @@ gint periodic_callback(gpointer data)
         if(validIter) {
             while(gtk_list_store_remove((GtkListStore *)_module.deviceTreeModel, &iter)) ;
         }
-        react_changed_device(NULL, NULL); // Update selected device to fix some issues
+        update_fields_with_tree_selection(_module.hardUpdateNextNPasses); // Update device fields to match device list
+        if(_module.hardUpdateNextNPasses > 0) _module.hardUpdateNextNPasses--;
     }
     /* Update firmware status if we're upgrading */
     gtk_level_bar_set_value(_module.firmUpgradeStatus, _module.firmware_upgrading ? _module.firm_upgrade_status : 0);
@@ -116,22 +118,20 @@ gboolean frontend_gui_callback(gpointer user_data)
 
     switch(action->action)
     {
-        case Set_ID:
-        {
-            /* Update selected device to use newest ID */
-            can_device_t dev = get_selected_device();
-            dev.id = action->intParam;
-            set_selected_device(dev);
-            break;
-        }
         case Snapshot:
         {
             /* Get contents of string and copy it to module */
             gtk_text_buffer_set_text(_module.snapshotTxt, *((char **)action->pointerParam), -1);
             break;
         }
+    case Set_ID:
+    case Set_Name:
+    {
+        /* Hard-Update for the next 500ms to ensure we pick up new name */
+        _module.hardUpdateNextNPasses = 5;
+        break;
+    }
 	case No_Action:
-        case Set_Name:
 	case Blink:
 	case FactoryDefault:
 	case Update_Firmware:
@@ -207,8 +207,9 @@ int connect_all_signals()
     add_txt_controller_status_buffer((GtkTextBuffer *)obj);
     
     /* Connect Selected Device label to can_devices file */
-    obj = gtk_builder_get_object(builder, "txt_selected_device");
-    add_lbl_selected_device((GtkLabel *)obj);
+    obj = gtk_builder_get_object(builder, "cmbobx_selected_device");
+    add_lbl_selected_device((GtkComboBox *)obj);
+    g_signal_connect(obj, "changed", G_CALLBACK(react_changed_device_from_combobox), NULL);
     
     /* Connect the widgets used to switch between POST and SSH */
     obj = gtk_builder_get_object(builder, "chckmnu_use_post");
@@ -254,14 +255,17 @@ int connect_all_signals()
     /* Connect server address and port text change to react function */
 
     /* Get reference to the list store */
-    _module.deviceTreeModel = (GtkTreeModel *)gtk_builder_get_object(builder, "lst_can_devices");
+    obj = gtk_builder_get_object(builder, "lst_can_devices");
+    _module.deviceTreeModel = (GtkTreeModel *)obj;
+    set_selected_device_treemodel((GtkTreeModel *)obj);
+
     
     _module.serverVersion = (GtkLabel *)gtk_builder_get_object(builder, "txt_server_version");
     _module.serverStatus = (GtkLabel *)gtk_builder_get_object(builder, "txt_server_status");
     
     obj = gtk_builder_get_object(builder, "slct_device_selection");
     add_slct_device_selection((GtkTreeSelection *)obj);
-    g_signal_connect(obj, "changed", G_CALLBACK(react_changed_device), NULL);
+    g_signal_connect(obj, "changed", G_CALLBACK(react_changed_device_from_treeview), NULL);
 
     return 0;
 }
