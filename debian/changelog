@@ -1,3 +1,9 @@
+penguintuner (0.4.2) stable; urgency=low
+
+  * Changed label in lower left to combobox so user can change device
+
+ -- Cory Ness <coryness@tytan.rocks>  Sun, 14 Mar 2021 19:30:00 -0500
+
 penguintuner (0.4.1) stable; urgency=low
 
   * Server status is now more descriptive
