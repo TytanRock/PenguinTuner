@@ -2,6 +2,7 @@
 <gresources>
 	<gresource prefix="/">
 		<file preprocess="xml-stripblanks">ui/MainApp.ui</file>
+		<file>ui/Penguin_Tuner.svg</file>
 	</gresource>
 </gresources>
 
