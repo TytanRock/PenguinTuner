@@ -18,7 +18,11 @@ src = [	'src/application.c',
 inc = include_directories(['include',
                            'backend/headers'])
 
-backend = 'backend/lib/' + architecture + '/libpenguinbackend.so'
+if architecture == 'macos'
+    backend = 'backend/lib/macos/libpenguinbackend.dylib'
+else
+    backend = 'backend/lib/' + architecture + '/libpenguinbackend.so'
+endif
 
 gresources = gnome.compile_resources(	'app_resources_ui', 
 					'src/app_resources_ui.gresource.xml',
