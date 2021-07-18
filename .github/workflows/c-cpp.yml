@@ -59,7 +59,7 @@ jobs:
         run: |
           mkdir macos-bins
           cp build/penguintuner macos-bins/
-          cp backend/lib/libpenguinbackend.dylib macos-bins/
+          cp backend/lib/macos/libpenguinbackend.dylib macos-bins/
       - name: 'upload'
         uses: actions/upload-artifact@v2
         with:
