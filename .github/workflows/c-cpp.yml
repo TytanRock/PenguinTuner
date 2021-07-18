@@ -45,6 +45,27 @@ jobs:
         name: PenguinTuner_Packages
         path: penguintuner*.deb
   
+  build-macos:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Prepare Runner'
+        run: |
+          brew install pkgconfig cmake python3 curl libssh gtk+3
+          pip3 install meson ninja
+      - name: 'build'
+        run: ./build.sh
+      - name: Create upload folder
+        run: |
+          mkdir macos-bins
+          cp build/penguintuner macos-bins/
+          cp backend/lib/libpenguinbackend.dylib macos-bins/
+      - name: 'upload'
+        uses: actions/upload-artifact@v2
+        with:
+          name: Mac Binaries
+          path: macos-bins/*
+  
   verify-install:
     runs-on: ubuntu-20.04
     needs: [build]
