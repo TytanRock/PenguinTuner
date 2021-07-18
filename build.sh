@@ -10,4 +10,4 @@ echo ${arch}
 rm -rf build
 meson setup -Darchitecture=${arch} build
 cd build
-ninja
+ninja $1
