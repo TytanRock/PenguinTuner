@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# If we're not root, prompt for root to install everything
-[ "$(whoami)" != "root" ] && exec sudo -- "$0" "$@"
-
 case "$(uname -s)" in
     Darwin*)
         brew update
@@ -10,6 +7,8 @@ case "$(uname -s)" in
         pip3 install meson ninja
         ;;
     Linux*)
+        # If we're not root, prompt for root to install everything
+        [ "$(whoami)" != "root" ] && exec sudo -- "$0" "$@"
         apt-get update
         apt-get install -y libcurl4-openssl-dev libgtk-3-dev libssh-dev build-essential meson ninja-build
         ;;
