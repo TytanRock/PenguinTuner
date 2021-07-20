@@ -32,7 +32,7 @@ If you want these up-to-date, file an issue or create a Pull Request with update
 
 # Who am I?
 
-I'm Cory Ness, an intern at CTRE and the maintainer of Penguin Tuner.
+I'm Cory Ness, an employee at CTRE and the maintainer of Penguin Tuner.
 
 While this makes it great for me to work on Penguin Tuner, it also means I'm sensitive to CTRE's IP and licensing concerns.
 
