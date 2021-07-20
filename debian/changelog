@@ -1,3 +1,9 @@
+penguintuner (0.4.3) stable; urgency=low
+
+  * Added support for MacOS
+
+ -- Cory Ness <coryness@tytan.rocks>  Tue, 20 Jul 2021 08:45:00 -0500
+
 penguintuner (0.4.2) stable; urgency=low
 
   * Changed label in lower left to combobox so user can change device
