@@ -45,7 +45,7 @@ sudo apt install ./penguintuner_<version>_<arch>.deb
 
 ## Mac/Linux Homebrew installation
 
-I also provide a homebrew tap to install penguintuner through the homebrew package manager. This is very easy to setup and install once you have homebrew. If you don't have homebrew, go to the [Homebrew Home Page](https://brew.sh/) which has instructions on installing brew.
+I also provide a homebrew tap to install Penguin Tuner through the homebrew package manager. This is very easy to setup and install once you have homebrew. If you don't have homebrew, go to the [Homebrew Home Page](https://brew.sh/) which has instructions on installing brew.
 
 Once brew is installed, then you can add my tap and install penguintuner.
 My tap is public at [TytanRock/homebrew-penguintuner](https://github.com/TytanRock/homebrew-penguintuner) if you want to look through it.
