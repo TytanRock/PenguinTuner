@@ -5,8 +5,6 @@ case "$(uname -s)" in
     Linux*)  arch="$(dpkg --print-architecture)"
 esac
 
-echo ${arch}
-
 rm -rf build
 meson setup -Darchitecture=${arch} build
 cd build
