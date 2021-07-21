@@ -9,6 +9,8 @@ else
 endif
 
 gtkdep = dependency('gtk+-3.0')
+curldep = dependency('libcurl')
+sshdep = dependency('libssh')
 
 src = [	'src/application.c', 
 	'src/robot_controller.c', 
@@ -34,7 +36,7 @@ executable(meson.project_name(),
            gresources, 
            src, 
            include_directories : inc, 
-           dependencies : [gtkdep],
+           dependencies : [gtkdep, curldep, sshdep],
            install: true,
            install_dir: 'bin',
            objects: backend)
