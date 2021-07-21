@@ -534,3 +534,99 @@ Description: A GUI application to interact with CTRE CAN devices
  penguintuner is written in C and utilizes the GTK+ toolkit for its
  interface.
 
+Package: penguintuner
+Version: 0.4.4
+Architecture: arm64
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 184
+Depends: libc6 (>= 2.17), libcurl4 (>= 7.16.2), libgdk-pixbuf2.0-0 (>= 2.25.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.4_arm64.deb
+Size: 40180
+MD5sum: c1cacbfd081a2f618a3b92278775b85e
+SHA1: e78997af3b143c528e84f60dbcba41a9f33e2ab0
+SHA256: cbf7eb336364f9a5a1a861e64c65947587ec011e0ad31cc5551642321f772750
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
+Package: penguintuner
+Version: 0.4.4
+Architecture: armhf
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 145
+Depends: libc6 (>= 2.7), libcurl4 (>= 7.16.2), libgdk-pixbuf2.0-0 (>= 2.25.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.4_armhf.deb
+Size: 36872
+MD5sum: 6dbbf9ecaf63d8e51ac91e20d92441ff
+SHA1: 0369863f878711ee0d6f66ac6e496eea45a366d3
+SHA256: 1e1048bb2d7e1af6625a6473c913bf6752ef43e222550a8b248ea000dad7edcb
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
+Package: penguintuner
+Version: 0.4.4
+Architecture: armel
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 165
+Depends: libc6 (>= 2.7), libcurl4 (>= 7.16.2), libgdk-pixbuf2.0-0 (>= 2.25.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.4_armel.deb
+Size: 37988
+MD5sum: b1251e00ac66fa92f4d5fad2334890e4
+SHA1: 1b82ee7509d0e1f03d096fe38c1baf6a22e33343
+SHA256: 832d28c55059d6dbaaa4d1bff90ae029908ea65d061b6dbcb057ab92a56085ff
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
+Package: penguintuner
+Version: 0.4.4
+Architecture: amd64
+Maintainer: Cory Ness <coryness@tytan.rocks>
+Installed-Size: 240
+Depends: libc6 (>= 2.14), libcurl4 (>= 7.16.2), libgdk-pixbuf2.0-0 (>= 2.25.2), libglib2.0-0 (>= 2.31.18), libgtk-3-0 (>= 3.9.10), libssh-4 (>= 0.8.0)
+Filename: ./penguintuner_0.4.4_amd64.deb
+Size: 61760
+MD5sum: 14f6876069b0cb9882361f7c9ec67167
+SHA1: c9b7d63fff4e6d2a4ec74288d024e8abf05611e0
+SHA256: 2df438181ea73a54a156a0b285647abafe841f6a8c8443fad41fb4c04a4919d8
+Section: electronics
+Priority: optional
+Homepage: https://penguintuner.tytan.rocks
+Description: A GUI application to interact with CTRE CAN devices
+ penguintuner is a windowed application that uses CTRE's diagnostic server
+ to interact with CAN devices.
+ .
+ penguintuner is limited to interacting solely with CTRE devices, and the
+ server must be ran on some platform that CTRE supports.
+ .
+ penguintuner is written in C and utilizes the GTK+ toolkit for its
+ interface.
+
