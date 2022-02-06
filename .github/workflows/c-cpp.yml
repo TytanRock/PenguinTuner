@@ -22,10 +22,10 @@ jobs:
         dpkg --add-architecture armel
         dpkg --add-architecture arm64
         apt update
-        apt install -y libcurl4-openssl-dev libgtk-3-dev libssh-dev meson build-essential debhelper ninja-build
-        apt install -y libgtk-3-dev:armhf libcurl4-openssl-dev:armhf libssh-dev:armhf crossbuild-essential-armhf
-        apt install -y libgtk-3-dev:armel libcurl4-openssl-dev:armel libssh-dev:armel crossbuild-essential-armel
-        apt install -y libgtk-3-dev:arm64 libcurl4-openssl-dev:arm64 libssh-dev:arm64 crossbuild-essential-arm64
+        apt install -y libcurl4-openssl-dev libgtk-4-dev libssh-dev meson build-essential debhelper ninja-build
+        apt install -y libgtk-4-dev:armhf libcurl4-openssl-dev:armhf libssh-dev:armhf crossbuild-essential-armhf
+        apt install -y libgtk-4-dev:armel libcurl4-openssl-dev:armel libssh-dev:armel crossbuild-essential-armel
+        apt install -y libgtk-4-dev:arm64 libcurl4-openssl-dev:arm64 libssh-dev:arm64 crossbuild-essential-arm64
     - name: 'build and package native'
       run: dpkg-buildpackage
     - name: 'build and package armhf'
@@ -51,8 +51,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Prepare Runner'
         run: |
-          brew install pkgconfig cmake python3 curl libssh gtk+3
-          pip3 install meson ninja
+          brew install pkgconfig cmake curl libssh gtk+4
       - name: 'build'
         run: ./build.sh
       - name: Create upload folder
