@@ -1,4 +1,5 @@
 *build/*
+*builds/*
 *.swp
 *.*~
 debian/.debhelper/
@@ -7,4 +8,5 @@ debian/penguintuner.substvars
 debian/penguintuner/
 debian/files
 obj-*
+cmake-build-debug/
 

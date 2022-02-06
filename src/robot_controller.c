@@ -1,6 +1,7 @@
 #include "robot_controller.h"
 #include "backend.h"
 #include <string.h>
+#include <gtk/gtk.h>
 
 #define MAX_IP_SIZE 40
 
@@ -10,10 +11,9 @@ static struct {
     GtkEntry *ssh_username_entry;
     GtkEntry *ssh_password_entry;
 
-    GtkCheckMenuItem *use_post_menuitem;
-    GtkCheckMenuItem *use_ssh_menuitem;
-
     GtkTextBuffer *controller_status_buffer;
+
+    upload_style selectedStyle;
 }_module;
 
 void react_btn_run_temporary_diag_server(GtkWidget *widget, gpointer data)
@@ -46,21 +46,11 @@ void add_txt_ssh_password_entry(GtkEntry *entry)
     _module.ssh_password_entry = entry;
 }
 
-void add_use_post_menuitem(GtkCheckMenuItem *menuitem)
-{
-    _module.use_post_menuitem = menuitem;
-}
-
-void add_use_ssh_menuitem(GtkCheckMenuItem *menuitem)
-{
-    _module.use_ssh_menuitem = menuitem;
-}
-
 void react_server_ip_change(GtkWidget *widget, gpointer data)
 {
     /* Allocate some space to do stringwork */
     char fullIp[MAX_IP_SIZE];
-    strncpy(fullIp, gtk_entry_get_text(_module.server_ip_entry), MAX_IP_SIZE);
+    strncpy(fullIp, gtk_entry_buffer_get_text(gtk_entry_get_buffer(_module.server_ip_entry)), MAX_IP_SIZE);
     /* Trim everything after the '#' */
     char *startOfComment = strstr(fullIp, "#");
     if(startOfComment == NULL)
@@ -79,42 +69,29 @@ void react_server_ip_change(GtkWidget *widget, gpointer data)
     
     /* Now concatenate the port to the URI */
     strncat(fullIp, ":", MAX_IP_SIZE - strlen(fullIp));
-    strncat(fullIp, gtk_entry_get_text(_module.server_port_entry), MAX_IP_SIZE - strlen(fullIp));
+    strncat(fullIp, gtk_entry_buffer_get_text(gtk_entry_get_buffer(_module.server_port_entry)), MAX_IP_SIZE - strlen(fullIp));
     
     /* And finally call into backend to set the ip */
     set_ip(fullIp);
 }
 
-void react_use_post_select(GtkWidget *widget, gpointer data)
+void react_upload_change(GSimpleAction *action, GVariant *parameter, gpointer win)
 {
-    if(gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget))
-    {
-        gtk_check_menu_item_set_active(_module.use_post_menuitem, TRUE);
-        gtk_check_menu_item_set_active(_module.use_ssh_menuitem, FALSE);
+    (void)win;
+    const char *uploadStyle = g_variant_get_string(parameter, NULL);
+    if(strcmp(uploadStyle, "POST") == 0) {
+        /* We chose upload via post */
+        _module.selectedStyle = POST;
+    } else if(strcmp(uploadStyle, "SSH") == 0) {
+        /* We chose upload via ssh */
+        _module.selectedStyle = SSH;
     }
-}
-
-void react_use_ssh_select(GtkWidget *widget, gpointer data)
-{
-    if(gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget))
-    {
-        gtk_check_menu_item_set_active(_module.use_ssh_menuitem, TRUE);
-        gtk_check_menu_item_set_active(_module.use_post_menuitem, FALSE);
-    }
+    g_action_change_state(G_ACTION(action), parameter);
 }
 
 void get_upload_style_parameters(upload_style *style, char *username, char *password)
 {
-    upload_style usedStyle = POST;
-    if(gtk_check_menu_item_get_active(_module.use_post_menuitem))
-    {
-        usedStyle = POST;
-    }
-    else if(gtk_check_menu_item_get_active(_module.use_ssh_menuitem))
-    {
-        usedStyle = SSH;
-    }
-    *style = usedStyle;
-    strcpy(username, gtk_entry_get_text(_module.ssh_username_entry));
-    strcpy(password, gtk_entry_get_text(_module.ssh_password_entry));
+    *style = _module.selectedStyle;
+    //strcpy(username, gtk_entry_buffer_get_text(gtk_entry_get_buffer(_module.ssh_username_entry)));
+    //strcpy(password, gtk_entry_buffer_get_text(gtk_entry_get_buffer(_module.ssh_password_entry)));
 }

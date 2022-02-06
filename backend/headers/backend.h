@@ -3,6 +3,8 @@
 
 #define MAX_SIZE_COUNT 30
 
+#include "penguinbackend_export.h"
+
 typedef enum _backend_error
 {
     /* General warnings and errors */
@@ -87,22 +89,22 @@ typedef struct _backend_action
 }backend_action;
 
 
-backend_error start_backend();
-backend_error stop_backend();
+PENGUINBACKEND_EXPORT backend_error start_backend();
+PENGUINBACKEND_EXPORT backend_error stop_backend();
 
-backend_error set_ip(char *ipAddr);
-backend_error get_devices(can_device_t *devices, int maxDeviceCount, int *deviceCount);
+PENGUINBACKEND_EXPORT backend_error set_ip(char *ipAddr);
+PENGUINBACKEND_EXPORT backend_error get_devices(can_device_t *devices, int maxDeviceCount, int *deviceCount);
 
-backend_error get_server_version(char *version);
-backend_error get_server_status(char *status);
+PENGUINBACKEND_EXPORT backend_error get_server_version(char *version);
+PENGUINBACKEND_EXPORT backend_error get_server_status(char *status);
 
-backend_error set_device_id(const can_device_t *device, int id, backend_callback callback);
-backend_error set_device_name(const can_device_t *device, const char *name, backend_callback callback);
-backend_error blink_device(const can_device_t *device, backend_callback callback);
-backend_error get_device_snapshot(const can_device_t *device, backend_callback callback);
-backend_error factory_default_device(const can_device_t *device, backend_callback callback);
+PENGUINBACKEND_EXPORT backend_error set_device_id(const can_device_t *device, int id, backend_callback callback);
+PENGUINBACKEND_EXPORT backend_error set_device_name(const can_device_t *device, const char *name, backend_callback callback);
+PENGUINBACKEND_EXPORT backend_error blink_device(const can_device_t *device, backend_callback callback);
+PENGUINBACKEND_EXPORT backend_error get_device_snapshot(const can_device_t *device, backend_callback callback);
+PENGUINBACKEND_EXPORT backend_error factory_default_device(const can_device_t *device, backend_callback callback);
 
-backend_error update_device_firmware(const can_device_t *device, const char *firmware_file, void (*firm_upgrade_callback)(double, int), backend_callback callback, upload_style style, const char *username, const char *password);
+PENGUINBACKEND_EXPORT backend_error update_device_firmware(const can_device_t *device, const char *firmware_file, void (*firm_upgrade_callback)(double, int), backend_callback callback, upload_style style, const char *username, const char *password);
 
 #endif
 
