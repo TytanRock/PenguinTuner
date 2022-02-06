@@ -9,7 +9,7 @@ on:
 
 jobs:
   # Build the project and ensure it compiles
-  build:
+  build-linux:
 
     runs-on: ubuntu-18.04
     container:
@@ -65,6 +65,44 @@ jobs:
         with:
           name: Mac Binaries
           path: macos-bins/*
+
+  build-windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            arch-name: x86_32
+            triplet: x86-windows
+          - os: windows-latest
+            arch-name: x86_64
+            triplet: x64-windows
+    
+    env:
+      # Indicates the location of the vcpkg as a Git submodule of the project repository.
+      VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+      VCPKG_DEFAULT_TRIPLET: ${{ matrix.triplet }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: lukka/get-cmake@latest
+      - uses: lukka/run-vcpkg@v10
+        id: runvcpkg
+        with:
+          vcpkgJsonGlob: 'vcpkg.json'
+      - name: Run CMake to build PenguinTuner.
+        uses: lukka/run-cmake@v10
+        id: runcmake
+        with:
+          configurePreset: 'msbuild-vcpkg'
+          buildPreset: 'msbuild-vcpkg'
+      - name: 'upload'
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows Backend ${{ matrix.arch-name }}
+          path: builds/msbuild-vcpkg/Debug/*
   
   verify-install:
     runs-on: ubuntu-20.04

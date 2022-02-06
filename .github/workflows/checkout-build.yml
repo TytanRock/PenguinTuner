@@ -8,7 +8,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build-native:
+  build-native-linux:
     strategy:
       fail-fast: false
       matrix:
