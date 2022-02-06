@@ -105,7 +105,7 @@ jobs:
   
   verify-install:
     runs-on: ubuntu-20.04
-    needs: [build]
+    needs: [build-linux]
     steps:
       - name: Download previous job artifact
         uses: actions/download-artifact@v2
