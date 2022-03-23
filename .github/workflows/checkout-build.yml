@@ -11,7 +11,7 @@ jobs:
   build-native-linux:
     runs-on: ubuntu-18.04
     container:
-      image: debian:bullseye
+      image: debian:experimental
     steps:
       - uses: actions/checkout@v2
       - name: configure
@@ -45,7 +45,7 @@ jobs:
       name: build and configure
       with:
         arch: ${{ matrix.arch }}
-        distro: bullseye
+        distro: experimental
         run: |
           ./configure.sh
           ./build.sh

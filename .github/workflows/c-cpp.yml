@@ -13,7 +13,7 @@ jobs:
 
     runs-on: ubuntu-18.04
     container:
-      image: debian:bullseye
+      image: debian:experimental
     steps:
     - uses: actions/checkout@v2
     - name: 'prepare runner'
@@ -106,7 +106,7 @@ jobs:
   verify-install:
     runs-on: ubuntu-18.04
     container:
-      image: debian:bullseye
+      image: debian:experimental
     needs: [build-linux]
     steps:
       - name: Download previous job artifact
