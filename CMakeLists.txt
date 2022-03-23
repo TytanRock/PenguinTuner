@@ -18,8 +18,24 @@ SET(SRCS src/app_callbacks.c
 # Configure project
 add_executable(${PROJECT_NAME} ${SRCS})
 
+if(WIN32)
+    SET(DIRECTORY "win32")
+elseif(WIN64)
+    SET(DIRECTORY "win64")
+elseif(${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "x86_64" OR ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "x64" OR ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "amd64")
+    SET(DIRECTORY "amd64")
+elseif(${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "armv7l" OR ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "armhf")
+    SET(DIRECTORY "armhf")
+elseif(${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "armv8b" OR ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "armv8l" OR ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "arm64")
+    SET(DIRECTORY "arm64")
+elseif(${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "armv6l")
+    SET(DIRECTORY "armel")
+else()
+    SET(DIRECTORY "macos")
+endif()
+
 target_link_directories(${PROJECT_NAME} PRIVATE ${GTK4_LIBRARY_DIRS})
-target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/backend/lib/win64)
+target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/backend/lib/${DIRECTORY})
 
 # Target link libraries
 target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)

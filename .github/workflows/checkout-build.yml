@@ -9,13 +9,18 @@ on:
 
 jobs:
   build-native-linux:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-20.04
-          - os: macos-10.15
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-18.04
+    container:
+      image: debian:bullseye
+    steps:
+      - uses: actions/checkout@v2
+      - name: configure
+        run: ./configure.sh
+      - name: build
+        run: ./build.sh
+
+  build-native-macos:
+    runs-on: macos-10.15
     steps:
       - uses: actions/checkout@v2
       - name: configure
@@ -40,7 +45,7 @@ jobs:
       name: build and configure
       with:
         arch: ${{ matrix.arch }}
-        distro: buster
+        distro: bullseye
         run: |
           ./configure.sh
           ./build.sh
