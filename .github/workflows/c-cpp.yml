@@ -13,12 +13,11 @@ jobs:
 
     runs-on: ubuntu-18.04
     container:
-      image: debian:bullseye
+      image: debian:bookworm
     steps:
     - uses: actions/checkout@v2
     - name: 'prepare runner'
       run: |
-        echo "deb http://deb.debian.org/debian bullseye-backports main" > /etc/apt/sources.list.d/bullseye-backports.list
         dpkg --add-architecture armhf
         dpkg --add-architecture armel
         dpkg --add-architecture arm64

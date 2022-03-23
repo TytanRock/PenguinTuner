@@ -11,11 +11,9 @@ jobs:
   build-native-linux:
     runs-on: ubuntu-18.04
     container:
-      image: debian:bullseye
+      image: debian:bookworm
     steps:
       - uses: actions/checkout@v2
-      - name: add backports
-        run: echo "deb http://deb.debian.org/debian bullseye-backports main" > /etc/apt/sources.list.d/bullseye-backports.list
       - name: configure
         run: ./configure.sh
       - name: build
@@ -43,12 +41,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: uraimo/run-on-arch-action@v2.0.8
+    - uses: tytanrock/run-on-arch-action@master
       name: build and configure
       with:
         arch: ${{ matrix.arch }}
-        distro: bullseye
+        distro: bookworm
         run: |
-          echo "deb http://deb.debian.org/debian bullseye-backports main" > /etc/apt/sources.list.d/bullseye-backports.list
           ./configure.sh
           ./build.sh
