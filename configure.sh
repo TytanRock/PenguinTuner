@@ -10,7 +10,7 @@ case "$(uname -s)" in
         # If we're not root, prompt for root to install everything
         [ "$(whoami)" != "root" ] && exec sudo -- "$0" "$@"
         apt-get update
-        apt-get install -y libcurl4-openssl-dev libgtk-4-dev libssh-dev build-essential meson ninja-build
+        apt-get install -y libcurl4-openssl-dev libgtk-4-dev libssh-dev build-essential cmake make
         ;;
     *)
         echo "Unknown Architecture, cannot configure"
