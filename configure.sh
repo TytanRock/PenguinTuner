@@ -3,8 +3,7 @@
 case "$(uname -s)" in
     Darwin*)
         brew update
-        brew install pkgconfig cmake python3 curl libssh gtk+4
-        pip3 install meson ninja
+        brew install pkgconfig cmake curl libssh gtk+4
         ;;
     Linux*)
         # If we're not root, prompt for root to install everything
