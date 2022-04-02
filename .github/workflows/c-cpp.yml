@@ -38,11 +38,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: 'prepare runner'
       run: |
-        {matrix.add-arch-command}
+        ${{ matrix.add-arch-command }}
         apt-get update
-        apt install -y {matrix.apt-get-libs}
+        apt install -y ${{ matrix.apt-get-libs }}
     - name: 'build and package'
-      run: {matrix.make-and-build}
+      run: ${{ matrix.make-and-build }}
     - name: 'move debs back into home'
       run: |
         ls ..
@@ -51,7 +51,7 @@ jobs:
     - name: upload
       uses: actions/upload-artifact@v2
       with:
-        name: PenguinTuner Package {matrix.os}
+        name: PenguinTuner Package ${{ matrix.os }}
         path: penguintuner*.deb
   
   build-macos:
