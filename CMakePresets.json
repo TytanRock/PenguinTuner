@@ -69,6 +69,10 @@
         "VCPKG_TARGET_TRIPLET": {
           "type": "triplet",
           "value": "x64-windows"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "string",
+          "value": "Release"
         }
       }
     }
