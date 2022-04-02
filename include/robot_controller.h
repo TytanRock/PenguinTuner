@@ -8,15 +8,12 @@ void react_btn_run_temporary_diag_server(GtkWidget *widget, gpointer data);
 
 void react_server_ip_change(GtkWidget *widget, gpointer data);
 
-void react_use_post_select(GtkWidget *widget, gpointer data);
-void react_use_ssh_select(GtkWidget *widget, gpointer data);
+void react_upload_change(GSimpleAction *action, GVariant *parameter, gpointer win);
 
 void add_txt_server_ip_entry(GtkEntry *entry);
 
 void add_txt_server_port_entry(GtkEntry *entry);
 
-void add_use_ssh_menuitem(GtkCheckMenuItem *menuitem);
-void add_use_post_menuitem(GtkCheckMenuItem *menuitem);
 void add_txt_ssh_password_entry(GtkEntry *entry);
 void add_txt_ssh_username_entry(GtkEntry *entry);
 

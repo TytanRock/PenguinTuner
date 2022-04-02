@@ -1,0 +1,9 @@
+{
+    "name": "penguintuner",
+    "version-string": "dev",
+    "dependencies": [
+        "curl",
+        "libssh",
+        "gtk"
+    ]
+}

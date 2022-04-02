@@ -8,14 +8,19 @@ on:
     branches: [ master ]
 
 jobs:
-  build-native:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-20.04
-          - os: macos-10.15
-    runs-on: ${{ matrix.os }}
+  build-native-linux:
+    runs-on: ubuntu-18.04
+    container:
+      image: debian:bookworm
+    steps:
+      - uses: actions/checkout@v2
+      - name: configure
+        run: ./configure.sh
+      - name: build
+        run: ./build.sh
+
+  build-native-macos:
+    runs-on: macos-10.15
     steps:
       - uses: actions/checkout@v2
       - name: configure
@@ -36,11 +41,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: uraimo/run-on-arch-action@v2.0.8
+    - uses: tytanrock/run-on-arch-action@master
       name: build and configure
       with:
         arch: ${{ matrix.arch }}
-        distro: buster
+        distro: bookworm
         run: |
           ./configure.sh
           ./build.sh
